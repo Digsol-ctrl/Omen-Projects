@@ -1,0 +1,22 @@
+[
+  {
+    "id": "residential",
+    "title": "Residential Building Construction",
+    "description": "Design and construction of homes, duplexes and small apartment blocks."
+  },
+  {
+    "id": "architectural",
+    "title": "Architectural Design",
+    "description": "Architectural design services: planning, drawings and visualisation."
+  },
+  {
+    "id": "management",
+    "title": "Project Management",
+    "description": "Full project management: procurement, scheduling and supervision."
+  },
+  {
+    "id": "boq",
+    "title": "Bills of Quantities",
+    "description": "Accurate BOQs for cost estimation and procurement."
+  }
+]

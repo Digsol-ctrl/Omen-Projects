@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>More Projects | Omen Projects</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #001f4d;
+            --yellow: #ffcc00;
+            --muted: #6b6b6b;
+            --light: #f8f9fa;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--muted);
+            background-color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--navy);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--yellow);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--yellow);
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--navy) 0%, #003d7a 100%);
+            padding: 80px 0;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 204, 0, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            position: relative;
+            z-index: 1;
+            line-height: 1.6;
+        }
+
+        /* Projects Grid */
+        .projects-section {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 42px;
+            color: var(--navy);
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--yellow);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: var(--muted);
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .project-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            animation: slideInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.2s; }
+        .project-card:nth-child(3) { animation-delay: 0.3s; }
+        .project-card:nth-child(4) { animation-delay: 0.4s; }
+        .project-card:nth-child(5) { animation-delay: 0.5s; }
+        .project-card:nth-child(6) { animation-delay: 0.6s; }
+        .project-card:nth-child(7) { animation-delay: 0.7s; }
+        .project-card:nth-child(8) { animation-delay: 0.8s; }
+        .project-card:nth-child(9) { animation-delay: 0.9s; }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .project-carousel-container {
+            position: relative;
+            width: 100%;
+            height: 280px;
+            background-color: #f0f0f0;
+            overflow: hidden;
+        }
+
+        .project-carousel-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .project-carousel-track img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .indicator.active {
+            background: var(--yellow);
+            width: 20px;
+            border-radius: 4px;
+        }
+
+        .indicator:hover {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .project-info {
+            padding: 25px;
+        }
+
+        .project-category {
+            display: inline-block;
+            background: var(--navy);
+            color: var(--yellow);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .project-info h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 20px;
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+
+        .project-info p {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .project-info .project-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .project-info .project-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .project-info .btn {
+            background: var(--navy);
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            font-size: 14px;
+        }
+
+        .project-info .btn:hover {
+            background: var(--yellow);
+            color: var(--navy);
+            transform: translateX(5px);
+        }
+
+        /* Filter Section */
+        .filter-section {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: #fff;
+            color: var(--navy);
+            border: 2px solid var(--navy);
+            padding: 10px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--navy);
+            color: #fff;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--navy) 0%, #003d7a 100%);
+            padding: 60px 0;
+            text-align: center;
+            color: #fff;
+            margin: 60px 0 0 0;
+        }
+
+        .cta-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 16px;
+            max-width: 500px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--yellow);
+            color: var(--navy);
+            padding: 15px 40px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 204, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            padding: 15px 40px;
+            border: 2px solid #fff;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: #fff;
+            color: var(--navy);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--navy);
+            color: #fff;
+            padding: 50px 0 20px;
+            position: relative;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--yellow);
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .footer-column p {
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--yellow);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--yellow);
+            color: var(--navy);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 14px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            max-height: 80vh;
+            overflow: auto;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: #fff;
+            font-size: 36px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: var(--yellow);
+        }
+
+        .modal-carousel-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background-color: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .modal-carousel-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.6s ease;
+        }
+
+        .modal-carousel-track img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 204, 0, 0.9);
+            color: var(--navy);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .carousel-prev {
+            left: 20px;
+        }
+
+        .carousel-next {
+            right: 20px;
+        }
+
+        .carousel-nav:hover {
+            background: var(--yellow);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .modal-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 20px 0;
+        }
+
+        .modal-indicators .indicator {
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-indicators .indicator.active {
+            background: var(--yellow);
+            width: 24px;
+            border-radius: 6px;
+        }
+
+        .modal-gallery h2 {
+            color: var(--yellow);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: var(--navy);
+                padding: 20px;
+                gap: 15px;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .hero {
+                padding: 50px 0;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title h2 {
+                font-size: 32px;
+            }
+
+            .project-carousel-container {
+                height: 220px;
+            }
+
+            .cta-section h2 {
+                font-size: 28px;
+            }
+
+            .modal-carousel-container {
+                height: 300px;
+            }
+
+            .carousel-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            .carousel-prev {
+                left: 10px;
+            }
+
+            .carousel-next {
+                right: 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 24px;
+            }
+
+            .projects-grid {
+                gap: 20px;
+            }
+
+            .section-title h2 {
+                font-size: 24px;
+            }
+
+            .filter-buttons {
+                gap: 10px;
+            }
+
+            .filter-btn {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="main-header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-building"></i> Omen Projects
+            </a>
+            
+            <button class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="index.html#team">Team</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="more-projects.html">More Projects</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="tel:+263778754141" style="color: var(--yellow);">Call: +263 778 754 141</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="animate__animated animate__fadeInDown">Our Complete Portfolio</h1>
+            <p class="animate__animated animate__fadeInUp">Explore our extensive collection of construction projects showcasing excellence, innovation, and quality craftsmanship across diverse sectors.</p>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <div class="projects-section">
+        <div class="container">
+            <div class="filter-section">
+                <h3 style="color: var(--navy); margin-bottom: 20px; font-family: 'Montserrat', sans-serif;">Filter by Category</h3>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" onclick="filterProjects('all')">All Projects</button>
+                    <button class="filter-btn" onclick="filterProjects('commercial')">Commercial</button>
+                    <button class="filter-btn" onclick="filterProjects('residential')">Residential</button>
+                    <button class="filter-btn" onclick="filterProjects('renovation')">Renovation</button>
+                    <button class="filter-btn" onclick="filterProjects('infrastructure')">Infrastructure</button>
+                </div>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Projects will be dynamically loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Gallery Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content modal-gallery">
+            <span class="modal-close" onclick="closeProjectModal()">&times;</span>
+            <h2 id="modalProjectTitle">Project Gallery</h2>
+            
+            <div class="modal-carousel-container">
+                <div class="modal-carousel-track" id="modalCarouselTrack">
+                    <!-- Images will be loaded dynamically -->
+                </div>
+                <button class="carousel-nav carousel-prev" onclick="prevModalSlide()"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-nav carousel-next" onclick="nextModalSlide()"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            
+            <div class="modal-indicators" id="modalIndicators">
+                <!-- Indicators will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Start Your Project?</h2>
+            <p>Contact Omen Projects today for a free consultation. Our expert team is ready to bring your vision to life.</p>
+            <div class="cta-buttons">
+                <a href="tel:+263778754141" class="btn-primary">Call Now: +263 778 754 141</a>
+                <a href="index.html#contact" class="btn-secondary">Request Quote</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Omen Projects</h3>
+                    <p>Building excellence through quality, safety, and innovation. Delivering construction projects that exceed expectations.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#services">Services</a></li>
+                        <li><a href="index.html#team">Team</a></li>
+                        <li><a href="index.html#projects">Projects</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Building Construction</a></li>
+                        <li><a href="#">Project Management</a></li>
+                        <li><a href="#">Renovation</a></li>
+                        <li><a href="#">Architectural Services</a></li>
+                        <li><a href="#">Bill of Quantity</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-phone"></i> +263 778 754 141</p>
+                    <p><i class="fas fa-envelope"></i> info@omenprojects.com</p>
+                    <p><i class="fas fa-clock"></i> Mon-Fri: 8AM-6PM<br>Sat: 9AM-2PM</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 Omen Projects. All Rights Reserved. | Designed by Digits Digital</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Projects Data
+        const projectsData = [
+            {
+                id: 1,
+                title: 'Skyline Business Center',
+                category: 'commercial',
+                description: 'A 15-story commercial complex with modern office spaces, retail areas, and underground parking.',
+                duration: '24 months',
+                budget: '$8.5M',
+                location: 'Downtown',
+                images: [
+                    'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+                    'https://images.unsplash.com/photo-1486718448742-163732cd3d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+                    'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+                    'https://images.unsplash.com/photo-1460317442991-0ec209397118?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80'
+                ]
+            },
+            {
+                id: 2,
+                title: 'Riverside Luxury Apartments',
+                category: 'residential',
+                description: 'Luxury residential complex with 50 units, swimming pool, gym, and waterfront views.',
+                duration: '18 months',
+                budget: '$12M',
+                location: 'Riverside',
+                images: [
+                    'https://images.unsplash.com/photo-1600585154340-043788447ebc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+                    'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+                    'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+                    'https://images.unsplash.com/photo-1512223557129-26bde4e574b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80'
+                ]
+            },
+            {
+                id: 3,
+                title: 'Historic Bank Building Restoration',
+                category: 'renovation',
+                description: 'Complete restoration and modernization of a 1920s bank building for contemporary office use.',
+                duration: '12 months',
+                budget: '$5.2M',
+                location: 'Heritage District',
+                images: [
+                    'https://images.unsplash.com/photo-1615873968403-89e068629265?ixlib=rb-4.0.3&auto=format&fit=crop&w=1332&q=80',
+                    'https://images.unsplash.com/photo-1554909811-aea14fcc0ce9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1332&q=80',
+                    'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&auto=format&fit=crop&w=1332&q=80',
+                    'https://images.unsplash.com/photo-1533090161392-a8255ba5eaea?ixlib=rb-4.0.3&auto=format&fit=crop&w=1332&q=80'
+                ]
+            },
+            {
+                id: 4,
+                title: 'Tech Park Development',
+                category: 'commercial',
+                description: 'State-of-the-art technology park with office complexes, data centers, and innovation hubs.',
+                duration: '30 months',
+                budget: '$18M',
+                location: 'Technology Hub',
+                images: [
+                    'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+                    'https://images.unsplash.com/photo-1486325212027-8081e485255e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+                    'https://images.unsplash.com/photo-1487365144351-b8472da7d491?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+                    'https://images.unsplash.com/photo-1486572788984-e10dcb2be48b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80'
+                ]
+            },
+            {
+                id: 5,
+                title: 'Central Highway Expansion',
+                category: 'infrastructure',
+                description: '50km highway expansion with modern infrastructure, bridges, and drainage systems.',
+                duration: '36 months',
+                budget: '$25M',
+                location: 'Regional Highway',
+                images: [
+                    'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+                    'https://images.unsplash.com/photo-1581092163562-40460ef61c04?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+                    'https://images.unsplash.com/photo-1581092162384-8987c1d64718?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+                    'https://images.unsplash.com/photo-1581091918015-e4ae37a08b25?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80'
+                ]
+            },
+            {
+                id: 6,
+                title: 'Green Valley Estates',
+                category: 'residential',
+                description: '200-unit eco-friendly residential community with sustainable building practices.',
+                duration: '28 months',
+                budget: '$15M',
+                location: 'Green Valley',
+                images: [
+                    'https://images.unsplash.com/photo-1574183365688-49f73c299263?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+                    'https://images.unsplash.com/photo-1570129477492-45ac003d2e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+                    'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+                    'https://images.unsplash.com/photo-1570129477492-45ac003d2e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80'
+                ]
+            },
+            {
+                id: 7,
+                title: 'Shopping Mall Renovation',
+                category: 'renovation',
+                description: 'Complete modernization and expansion of existing shopping mall with updated facilities.',
+                duration: '15 months',
+                budget: '$7.8M',
+                location: 'Shopping District',
+                images: [
+                    'https://images.unsplash.com/photo-1567521464027-f127ff144326?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+                    'https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+                    'https://images.unsplash.com/photo-1565521409186-a36f5e417d72?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+                    'https://images.unsplash.com/photo-1586265034519-c21dbc4d8e1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80'
+                ]
+            },
+            {
+                id: 8,
+                title: 'Medical Center Complex',
+                category: 'commercial',
+                description: 'Modern medical facility with multiple departments, research labs, and patient care units.',
+                duration: '22 months',
+                budget: '$13.5M',
+                location: 'Medical District',
+                images: [
+                    'https://images.unsplash.com/photo-1587854692152-cbe660dbde0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+                    'https://images.unsplash.com/photo-1576091160550-112173faf246?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+                    'https://images.unsplash.com/photo-1576091160692-112c51435537?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+                    'https://images.unsplash.com/photo-1576091160949-112c51435537?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80'
+                ]
+            },
+            {
+                id: 9,
+                title: 'Water Treatment Plant',
+                category: 'infrastructure',
+                description: 'State-of-the-art water treatment facility with advanced purification systems.',
+                duration: '20 months',
+                budget: '$11.2M',
+                location: 'Industrial Zone',
+                images: [
+                    'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+                    'https://images.unsplash.com/photo-1581092162384-8987c1d64718?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+                    'https://images.unsplash.com/photo-1581091918015-e4ae37a08b25?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+                    'https://images.unsplash.com/photo-1581092923537-a7c44ca34a77?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80'
+                ]
+            }
+        ];
+
+        let currentFilter = 'all';
+        let currentModalProjectId = 0;
+        let currentModalSlide = 0;
+
+        // Initialize Projects
+        function initProjects() {
+            renderProjects(projectsData);
+        }
+
+        // Filter Projects
+        function filterProjects(category) {
+            currentFilter = category;
+            
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Filter and render
+            const filtered = category === 'all' 
+                ? projectsData 
+                : projectsData.filter(p => p.category === category);
+            
+            renderProjects(filtered);
+        }
+
+        // Render Projects
+        function renderProjects(projects) {
+            const grid = document.getElementById('projectsGrid');
+            grid.innerHTML = '';
+
+            projects.forEach((project, index) => {
+                const projectCard = document.createElement('div');
+                projectCard.className = 'project-card';
+                projectCard.style.animationDelay = (index * 0.1) + 's';
+                
+                projectCard.innerHTML = `
+                    <div class="project-carousel-container">
+                        <div class="project-carousel-track" data-project="${project.id}">
+                            ${project.images.map(img => `
+                                <img src="${img}" alt="${project.title}">
+                            `).join('')}
+                        </div>
+                        <div class="carousel-indicators">
+                            ${project.images.map((_, i) => `
+                                <span class="indicator ${i === 0 ? 'active' : ''}" onclick="changeCarouselSlide(this, ${project.id})"></span>
+                            `).join('')}
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <span class="project-category">${project.category.toUpperCase()}</span>
+                        <h3>${project.title}</h3>
+                        <p>${project.description}</p>
+                        <div class="project-meta">
+                            <span><i class="fas fa-calendar"></i> ${project.duration}</span>
+                            <span><i class="fas fa-map-marker-alt"></i> ${project.location}</span>
+                        </div>
+                        <button class="btn" onclick="openProjectModal(${project.id})">View Gallery</button>
+                    </div>
+                `;
+
+                grid.appendChild(projectCard);
+            });
+
+            // Start carousels
+            startAllCarousels();
+        }
+
+        // Carousel Functions
+        function startAllCarousels() {
+            document.querySelectorAll('.project-carousel-track').forEach(carousel => {
+                const projectId = carousel.getAttribute('data-project');
+                startCarouselAutoScroll(carousel, projectId);
+            });
+        }
+
+        function startCarouselAutoScroll(carousel, projectId) {
+            let currentSlide = 0;
+            const images = carousel.querySelectorAll('img');
+            const container = carousel.parentElement;
+            const indicators = container.querySelectorAll('.indicator');
+
+            const autoScroll = () => {
+                currentSlide = (currentSlide + 1) % images.length;
+                carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+                updateIndicators(indicators, currentSlide);
+            };
+
+            setInterval(autoScroll, 5000);
+        }
+
+        function changeCarouselSlide(indicator, projectId) {
+            const container = indicator.closest('.carousel-indicators').parentElement;
+            const carousel = container.querySelector('.project-carousel-track');
+            const indicators = container.querySelectorAll('.indicator');
+            const slideIndex = Array.from(indicators).indexOf(indicator);
+
+            carousel.style.transform = `translateX(-${slideIndex * 100}%)`;
+            updateIndicators(indicators, slideIndex);
+        }
+
+        function updateIndicators(indicators, activeIndex) {
+            indicators.forEach((ind, index) => {
+                ind.classList.toggle('active', index === activeIndex);
+            });
+        }
+
+        // Modal Functions
+        function openProjectModal(projectId) {
+            const project = projectsData.find(p => p.id === projectId);
+            currentModalProjectId = projectId;
+            currentModalSlide = 0;
+
+            document.getElementById('modalProjectTitle').textContent = project.title;
+            const track = document.getElementById('modalCarouselTrack');
+            const indicators = document.getElementById('modalIndicators');
+
+            track.innerHTML = '';
+            indicators.innerHTML = '';
+
+            project.images.forEach((img, index) => {
+                const imgEl = document.createElement('img');
+                imgEl.src = img;
+                imgEl.alt = project.title;
+                track.appendChild(imgEl);
+
+                const indicator = document.createElement('div');
+                indicator.className = `indicator ${index === 0 ? 'active' : ''}`;
+                indicator.onclick = () => {
+                    currentModalSlide = index;
+                    updateModalCarousel();
+                };
+                indicators.appendChild(indicator);
+            });
+
+            document.getElementById('projectModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProjectModal() {
+            document.getElementById('projectModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function updateModalCarousel() {
+            const track = document.getElementById('modalCarouselTrack');
+            track.style.transform = `translateX(-${currentModalSlide * 100}%)`;
+
+            document.querySelectorAll('#modalIndicators .indicator').forEach((ind, index) => {
+                ind.classList.toggle('active', index === currentModalSlide);
+            });
+        }
+
+        function nextModalSlide() {
+            const project = projectsData.find(p => p.id === currentModalProjectId);
+            currentModalSlide = (currentModalSlide + 1) % project.images.length;
+            updateModalCarousel();
+        }
+
+        function prevModalSlide() {
+            const project = projectsData.find(p => p.id === currentModalProjectId);
+            currentModalSlide = (currentModalSlide - 1 + project.images.length) % project.images.length;
+            updateModalCarousel();
+        }
+
+        // Close modal on outside click
+        document.getElementById('projectModal').addEventListener('click', (e) => {
+            if (e.target.id === 'projectModal') {
+                closeProjectModal();
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (document.getElementById('projectModal').style.display === 'flex') {
+                if (e.key === 'Escape') closeProjectModal();
+                if (e.key === 'ArrowLeft') prevModalSlide();
+                if (e.key === 'ArrowRight') nextModalSlide();
+            }
+        });
+
+        // Mobile Navigation
+        document.getElementById('mobileToggle').addEventListener('click', () => {
+            document.getElementById('navMenu').classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navMenu').classList.remove('active');
+            });
+        });
+
+        // Initialize on load
+        window.addEventListener('load', initProjects);
+    </script>
+</body>
+</html>

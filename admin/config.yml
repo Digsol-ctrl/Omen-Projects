@@ -1,0 +1,36 @@
+backend:
+  name: git-gateway
+  branch: master
+media_folder: "images"
+public_folder: "/images"
+site_url: ""
+
+collections:
+  - name: "services"
+    label: "Services"
+    folder: "data"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "title"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "ID", name: "id", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+
+  - name: "projects"
+    label: "Projects"
+    folder: "data"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "ID", name: "id", widget: "string"}
+      - {label: "Location", name: "location", widget: "string"}
+      - {label: "Images", name: "images", widget: "list", allow_add: true, field: {label: "Image", name: "image", widget: "image"}}
+
+files:
+  - label: "Services JSON"
+    name: "services_json"
+    file: "data/services.json"
+    fields:
+      - {label: "Services", name: "services", widget: "list", fields: [{label: "Title", name: "title", widget: "string"},{label: "ID", name: "id", widget: "string"},{label: "Description", name: "description", widget: "text"}]}
