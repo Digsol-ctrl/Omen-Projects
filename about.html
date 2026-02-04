@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Omen Projects | Construction & Project Management — Bulawayo, Zimbabwe</title>
+    <meta name="description" content="Omen Projects — professional construction, architectural design, project management for Zimbabwean diaspora. Manage your building projects from abroad with confidence. Based in Bulawayo, Zimbabwe.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <style>
+        /* Page Loader Styles */
+        @keyframes spin-loader {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes pulse-loader {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        @keyframes slide-down {
+            from { opacity: 1; transform: translateY(-100%); }
+            to { opacity: 0; transform: translateY(0); }
+        }
+
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #001f4d 0%, #003d7a 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            flex-direction: column;
+            gap: 20px;
+            transition: all 0.5s ease;
+        }
+
+        .page-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            animation: slide-down 0.6s ease forwards;
+        }
+
+        .loader-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .loader-logo img {
+            width: 100px;
+            height: 100px;
+            animation: pulse-loader 1.5s ease-in-out infinite;
+        }
+
+        .loader-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 204, 0, 0.2);
+            border-top: 4px solid #ffd700;
+            border-right: 4px solid #ffd700;
+            border-radius: 50%;
+            animation: spin-loader 1.2s linear infinite;
+        }
+
+        .loader-text {
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 2px;
+            animation: pulse-loader 1.5s ease-in-out infinite;
+        }
+
+        @keyframes slideInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 8px 24px rgba(0,31,77,0.15); }
+            50% { box-shadow: 0 12px 32px rgba(255,204,0,0.25); }
+        }
+        @keyframes float-up {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* Hero section with stunning visuals */
+        .about-hero {
+            background: linear-gradient(135deg, #001f4d 0%, #003d7a 50%, #001f4d 100%);
+            color: #fff;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,204,0,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float-up 6s ease-in-out infinite;
+        }
+        .about-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -15%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,204,0,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .about-hero .container {
+            position: relative;
+            z-index: 2;
+        }
+        .about-hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            margin-bottom: 15px;
+            font-weight: 800;
+            animation: slideInDown 0.8s ease-out;
+            letter-spacing: -0.5px;
+        }
+        .about-hero p {
+            font-size: 18px;
+            max-width: 900px;
+            margin: 0 auto;
+            color: rgba(255,255,255,0.95);
+            animation: slideInUp 0.8s ease-out 0.2s both;
+            line-height: 1.7;
+        }
+
+        /* Main content layout */
+        main {
+            padding: 80px 20px !important;
+        }
+
+        /* Split grid layout */
+        .split-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+            margin-bottom: 60px;
+        }
+        .split-grid > div:nth-child(1) { animation: slideInLeft 0.8s ease-out; }
+        .split-grid > div:nth-child(2) { animation: slideInRight 0.8s ease-out; }
+        @media (max-width: 900px) {
+            .split-grid { grid-template-columns: 1fr; gap: 30px; }
+            .split-grid > div { animation: slideInUp 0.8s ease-out !important; }
+        }
+
+        /* Enhanced card styling */
+        .card {
+            background: #fff;
+            padding: 32px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,31,77,0.08);
+            border: 1px solid #f0f0f0;
+            transition: all 0.3s ease;
+            animation: slideInUp 0.8s ease-out;
+        }
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 32px rgba(0,31,77,0.15);
+            border-color: rgba(255,204,0,0.3);
+        }
+        .card h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #001f4d;
+            font-size: 24px;
+            margin-bottom: 16px;
+            font-weight: 800;
+        }
+        .card h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #001f4d;
+            font-size: 16px;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+        .card p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+        /* Values grid */
+        .values-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .values-list .card {
+            background: linear-gradient(135deg, #f8faff 0%, #f0f4ff 100%);
+            border: 1px solid rgba(255,204,0,0.2);
+            padding: 16px;
+            text-align: center;
+            font-weight: 600;
+            color: #001f4d;
+            box-shadow: none;
+            animation: slideInUp 0.6s ease-out;
+        }
+        .values-list .card:hover {
+            background: linear-gradient(135deg, rgba(255,204,0,0.1) 0%, rgba(255,204,0,0.05) 100%);
+            border-color: #ffd700;
+            box-shadow: 0 6px 16px rgba(255,204,0,0.15);
+        }
+        @media (max-width: 700px) {
+            .values-list { grid-template-columns: 1fr; }
+        }
+
+        /* CTA section styling */
+        .cta-section {
+            background: linear-gradient(135deg, #001f4d 0%, #003d7a 100%);
+            padding: 60px 32px;
+            border-radius: 12px;
+            color: #fff;
+            text-align: center;
+            animation: slideInUp 0.8s ease-out;
+        }
+        .cta-section h2 {
+            color: #fff;
+            margin-bottom: 12px;
+            font-size: 28px;
+        }
+        .cta-contacts {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 24px;
+        }
+        .cta-contacts .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* Section spacing */
+        section {
+            margin-bottom: 60px;
+        }
+        section#company-overview { animation: slideInUp 0.8s ease-out 0.1s both; }
+        section#differentiators { animation: slideInUp 0.8s ease-out 0.2s both; }
+        section#trust { animation: slideInUp 0.8s ease-out 0.3s both; }
+
+        /* List styling */
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            padding: 12px 0 12px 32px;
+            position: relative;
+            color: #555;
+            line-height: 1.8;
+        }
+        ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #ffd700;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        /* Button enhancements */
+        .btn {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Download button special */
+        .btn-primary {
+            background: #001f4d;
+            color: #fff;
+            border: 2px solid #001f4d;
+        }
+        .btn-primary:hover {
+            background: #ffd700;
+            color: #001f4d;
+            border-color: #ffd700;
+        }
+
+        /* WhatsApp button */
+        .btn-whatsapp {
+            background: #25D366;
+            color: #fff;
+            border: 2px solid #25D366;
+        }
+        .btn-whatsapp:hover {
+            background: #1da853;
+            border-color: #1da853;
+        }
+
+        /* Footer enhancement */
+        footer {
+            background: #001f4d;
+            color: #fff;
+            padding: 40px 0;
+            margin-top: 60px;
+        }
+        footer a {
+            color: #ffd700;
+        }
+        footer .footer-column h3 {
+            color: #ffd700;
+        }
+    </style>
+</head>
+<body>
+    <!-- Page Loader -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-logo">
+            <img src="logo.jpg" alt="Omen Projects Logo">
+            <div class="loader-spinner"></div>
+        </div>
+        <div class="loader-text">LOADING</div>
+    </div>
+
+    <!-- Header (kept consistent with index) -->
+    <header id="main-header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">Omen Projects</a>
+            <nav class="nav-menu">
+                <a href="index.html">Home</a>
+                <a href="about.html" aria-current="page">About</a>
+                <a href="index.html#services">Services</a>
+                <a href="index.html#projects">Projects</a>
+                <a href="index.html#contact">Contact</a>
+            </nav>
+            <button id="mobileToggle" class="mobile-toggle"><i class="fas fa-bars"></i></button>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="about-hero">
+        <div class="container">
+            <h1>About Omen Projects</h1>
+            <p>Professional construction, architectural design, project management and bills of quantities — Bulawayo-based. <strong>Your trusted construction partner for projects managed from abroad.</strong> We handle the technical delivery while you oversee from wherever you are.</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <!-- Company Overview -->
+        <section id="company-overview">
+            <div class="split-grid">
+                <div>
+                    <div class="card">
+                        <h2><i class="fas fa-building" style="color: #ffd700; margin-right: 12px;"></i>Who We Are</h2>
+                        <p>Omen Projects is a growing but professional construction firm headquartered in Bulawayo, Zimbabwe. We specialize in serving the Zimbabwean diaspora — providing transparent, professionally managed construction delivery for clients building from abroad. We combine practical construction experience with strong project governance to deliver high-quality buildings on time and within budget.</p>
+                        <p>Our core services include building construction, architectural design, project management and bills of quantities (BOQ).</p>
+                        <p><strong style="color: #001f4d;">Experience:</strong> Years of hands-on expertise across residential, commercial and renovation projects — structured to scale while maintaining professional delivery.</p>
+
+                        <div style="margin-top: 24px;">
+                            <a class="btn btn-primary" href="/assets/company-profile.pdf" download>
+                                <i class="fas fa-download"></i> Download Company Profile
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="card">
+                        <h2><i class="fas fa-lightbulb" style="color: #ffd700; margin-right: 12px;"></i>Mission, Vision & Values</h2>
+                        
+                        <h3><i class="fas fa-target-alt"></i> Mission</h3>
+                        <p>Deliver quality, reliable and transparent construction solutions that protect client value and ensure safe outcomes.</p>
+
+                        <h3><i class="fas fa-eye"></i> Vision</h3>
+                        <p>To become the trusted construction partner in Zimbabwe and for Zimbabweans abroad seeking professional project delivery back home.</p>
+
+                        <h3><i class="fas fa-star"></i> Values</h3>
+                        <div class="values-list">
+                            <div class="card"><i class="fas fa-handshake"></i> Professionalism</div>
+                            <div class="card"><i class="fas fa-hammer"></i> Quality Workmanship</div>
+                            <div class="card"><i class="fas fa-shield-alt"></i> Integrity</div>
+                            <div class="card"><i class="fas fa-clipboard-check"></i> Accountability</div>
+                            <div class="card"><i class="fas fa-comments"></i> Clear Communication</div>
+                            <div class="card"><i class="fas fa-check-circle"></i> Compliance</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What Makes Us Different -->
+        <section id="differentiators">
+            <div class="card">
+                <h2><i class="fas fa-rocket" style="color: #ffd700; margin-right: 12px;"></i>What Makes Us Different</h2>
+                <ul>
+                    <li><strong>Structured project management:</strong> Clear stages, milestones and reporting so projects run predictably.</li>
+                    <li><strong>Clear communication:</strong> Regular updates and documented decisions — especially important for diaspora clients.</li>
+                    <li><strong>Emphasis on quality & compliance:</strong> We follow industry best practices to meet safety and regulatory requirements.</li>
+                    <li><strong>Local delivery, diaspora-friendly:</strong> Remote approvals, transparent cost breakdowns (BOQs) and reliable supply-chain arrangements.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Trust & Approach -->
+        <section id="trust">
+            <div class="split-grid">
+                <div class="card">
+                    <h3><i class="fas fa-cog"></i> Our Approach</h3>
+                    <p>We combine technical expertise with practical site management, clear procurement processes and consistent client communication. Typical delivery includes scoping, design coordination, BOQ preparation, procurement, construction and handover with documented warranties.</p>
+                </div>
+                <div class="card">
+                    <h3><i class="fas fa-globe"></i> For Diaspora Clients</h3>
+                    <p><strong>Building back home from anywhere in the world.</strong></p>
+                    <p>We provide complete remote project oversight so you can confidently build in Zimbabwe while living abroad. Our services include:</p>
+                    <ul style="margin-top: 12px; margin-left: 0;">
+                        <li>Regular video updates and photo documentation</li>
+                        <li>Clear cost breakdowns (BOQs) transparent pricing</li>
+                        <li>Remote approval workflows</li>
+                        <li>Trusted local suppliers and skilled labour</li>
+                        <li>Professional compliance with Zimbabwean regulations</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section id="cta">
+            <div class="cta-section">
+                <h2>Ready to Discuss Your Project?</h2>
+                <p>Call us directly or message on WhatsApp for a quick consultation and next steps.</p>
+
+                <div class="cta-contacts">
+                    <a class="btn btn-primary" href="tel:+263778754141">
+                        <i class="fas fa-phone"></i> Call +263 778 754 141
+                    </a>
+                    <a class="btn btn-whatsapp" href="https://wa.me/263778754141?text=Hello%20Omen%20Projects%21%20I%20am%20interested%20in%20your%20services" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-whatsapp"></i> WhatsApp Us
+                    </a>
+                    <a class="btn" href="index.html#contact" style="background: #666; border-color: #666;">
+                        <i class="fas fa-envelope"></i> Contact Page
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer (copied style from index for consistency) -->
+    <footer>
+        <a href="https://wa.me/263778754141?text=Hello%20Omen%20Projects%21%20I%20am%20interested%20in%20your%20construction%20services." 
+            class="whatsapp-float" 
+            target="_blank" 
+            rel="noopener noreferrer">
+            <i class="fab fa-whatsapp"></i>
+            <span class="whatsapp-tooltip">Chat with us on WhatsApp</span>
+        </a>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3><i class="fas fa-hammer"></i> Omen Projects</h3>
+                    <p>Building your vision with quality, safety, and innovation. Beyond expectation.</p>
+                    <div style="margin-top: 16px;">
+                        <a href="tel:+263778754141" style="display: inline-block; margin-right: 12px;">
+                            <i class="fas fa-phone"></i> +263 778 754 141
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                        <li><a href="index.html#services"><i class="fas fa-wrench"></i> Services</a></li>
+                        <li><a href="index.html#projects"><i class="fas fa-images"></i> Projects</a></li>
+                        <li><a href="index.html#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <p style="margin-bottom: 8px;">
+                        <strong>No. 623 Hopelyn Estate</strong><br>
+                        <strong>Bulawayo, Zimbabwe</strong><br>
+                        <i class="fas fa-phone"></i> <a href="tel:+263778754141">+263 778 754 141</a><br>
+                        <i class="fas fa-envelope"></i> <a href="mailto:info@omenprojects.com">info@omenprojects.com</a>
+                    </p>
+                    <p style="margin-top: 12px; font-size: 0.9rem;">
+                        Sun-Thu: 8AM-6PM | Fri: 8AM-1PM
+                    </p>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2026 Omen Projects. All Rights Reserved. | Building Excellence Beyond Expectation</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        // Page Loader Functionality
+        window.addEventListener('load', function() {
+            const pageLoader = document.getElementById('pageLoader');
+            if (pageLoader) {
+                setTimeout(function() {
+                    pageLoader.classList.add('hidden');
+                }, 500);
+            }
+        });
+    </script>
+</body>
+</html>

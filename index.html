@@ -28,6 +28,74 @@
             --transition: all 0.3s ease;
         }
 
+        /* Page Loader Styles */
+        @keyframes spin-loader {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes pulse-loader {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        @keyframes slide-down {
+            from { opacity: 1; transform: translateY(-100%); }
+            to { opacity: 0; transform: translateY(0); }
+        }
+
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #001f4d 0%, #003d7a 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            flex-direction: column;
+            gap: 20px;
+            transition: all 0.5s ease;
+        }
+
+        .page-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            animation: slide-down 0.6s ease forwards;
+        }
+
+        .loader-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .loader-logo img {
+            width: 100px;
+            height: 100px;
+            animation: pulse-loader 1.5s ease-in-out infinite;
+        }
+
+        .loader-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 204, 0, 0.2);
+            border-top: 4px solid #ffd700;
+            border-right: 4px solid #ffd700;
+            border-radius: 50%;
+            animation: spin-loader 1.2s linear infinite;
+        }
+
+        .loader-text {
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 2px;
+            animation: pulse-loader 1.5s ease-in-out infinite;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -149,6 +217,39 @@
             opacity: 0;
             transform: translateX(50px);
             transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        /* Rotating Headline Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeOutDown {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+        }
+
+        .rotating-headline {
+            display: inline-block;
+            animation: fadeInUp 0.8s ease-in-out;
+            min-height: 60px;
+        }
+
+        .rotating-headline.fade-out {
+            animation: fadeOutDown 0.6s ease-in-out;
         }
         
         .slide-in-right.visible {
@@ -1598,6 +1699,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Top Contact Bar -->
     <div class="top-contact-bar">
@@ -1607,9 +1709,18 @@
                 <a href="mailto:info@omenprojects.co.zw"><i class="fas fa-envelope"></i> info@omenprojects.com</a>
             </div>
             <div>
-                <a href="#"><i class="fas fa-clock"></i> Mon-Fri: 8AM-6PM | Sat: 9AM-2PM</a>
+                <a href="#"><i class="fas fa-clock"></i> Sun-Thu: 8AM-6PM | Fri: 8AM-1PM</a>
             </div>
         </div>
+    </div>
+
+    <!-- Page Loader -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-logo">
+            <img src="logo.jpg" alt="Omen Projects Logo">
+            <div class="loader-spinner"></div>
+        </div>
+        <div class="loader-text">LOADING</div>
     </div>
 
     <!-- Header & Navigation -->
@@ -1628,7 +1739,7 @@
             
             <ul class="nav-menu" id="navMenu">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a href="about.html">About</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#team">Team</a></li>
                 <li><a href="#projects">Projects</a></li>
@@ -1642,7 +1753,7 @@
     <section class="hero" id="home">
         <div class="container">
             <span class="tagline fade-in">Beyond Expectation</span>
-            <h1 class="fade-in">Building Your Vision, Constructing Excellence</h1>
+            <h1 class="fade-in rotating-headline" id="rotatingHeadline">Building Your Vision, Constructing Excellence</h1>
             <p class="fade-in">Omen Projects is a premier construction company specializing in building construction, project management, renovation, architectural services, and bill of quantity. With decades of combined experience, we deliver quality, safety, and innovation in every project.</p>
             <div class="hero-btns">
                 <a href="#contact" class="btn btn-yellow shine-effect">Get a Quote</a>
@@ -1779,6 +1890,13 @@
                 </div>
             </div>
         </div>
+        <!-- Prominent About page button -->
+         <div 
+         style="width: 100%; text-align: center; margin-top: 20px;"
+         
+         >
+            <a href="about.html" class="btn btn-yellow" style="margin:auto;">More About Us</a>
+         </div>
     </section>
 
     <!-- Team Section -->
@@ -1823,6 +1941,83 @@
                         <p>David's innovative designs combine aesthetics with functionality, creating spaces that inspire.</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diaspora Market Section -->
+    <section style="padding: 80px 0; background: linear-gradient(135deg, rgba(0,31,77,0.05) 0%, rgba(255,204,0,0.05) 100%); border-top: 2px solid #ffd700;">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="slide-in-left" style="color: #001f4d;">Building for the Diaspora</h2>
+                <p style="color: #666; font-size: 1.1rem; margin-top: 10px;">Your trusted partner for construction projects managed from abroad</p>
+            </div>
+            
+            <div class="projects-grid" style="max-width: 1000px; margin: 0 auto;">
+                <div class="project-card scale-in" style="cursor: default;">
+                    <div style="padding: 40px; background: linear-gradient(135deg, #001f4d 0%, #003d7a 100%); color: #fff; border-radius: 12px 12px 0 0;">
+                        <i class="fas fa-video" style="font-size: 2.5rem; color: #ffd700; margin-bottom: 12px; display: block;"></i>
+                        <h3>Regular Updates & Video Reporting</h3>
+                    </div>
+                    <div class="project-info">
+                        <p>Stay connected with your project through weekly video updates, photo documentation, and detailed progress reports delivered directly to your inbox.</p>
+                    </div>
+                </div>
+
+                <div class="project-card scale-in" style="cursor: default;">
+                    <div style="padding: 40px; background: linear-gradient(135deg, #001f4d 0%, #003d7a 100%); color: #fff; border-radius: 12px 12px 0 0;">
+                        <i class="fas fa-file-invoice-dollar" style="font-size: 2.5rem; color: #ffd700; margin-bottom: 12px; display: block;"></i>
+                        <h3>Clear Cost Breakdown (BOQ)</h3>
+                    </div>
+                    <div class="project-info">
+                        <p>Transparent, detailed bills of quantities ensure you know exactly where every dollar goes. No hidden costs, no surprises.</p>
+                    </div>
+                </div>
+
+                <div class="project-card scale-in" style="cursor: default;">
+                    <div style="padding: 40px; background: linear-gradient(135deg, #001f4d 0%, #003d7a 100%); color: #fff; border-radius: 12px 12px 0 0;">
+                        <i class="fas fa-handshake" style="font-size: 2.5rem; color: #ffd700; margin-bottom: 12px; display: block;"></i>
+                        <h3>Remote Approvals & Decisions</h3>
+                    </div>
+                    <div class="project-info">
+                        <p>Our streamlined approval workflows mean your project decisions can be made quickly, even from across the world.</p>
+                    </div>
+                </div>
+
+                <div class="project-card scale-in" style="cursor: default;">
+                    <div style="padding: 40px; background: linear-gradient(135deg, #001f4d 0%, #003d7a 100%); color: #fff; border-radius: 12px 12px 0 0;">
+                        <i class="fas fa-shield-alt" style="font-size: 2.5rem; color: #ffd700; margin-bottom: 12px; display: block;"></i>
+                        <h3>Compliance & Quality Assured</h3>
+                    </div>
+                    <div class="project-info">
+                        <p>Full adherence to Zimbabwean building codes, regulations, and best practices. Your project meets all legal and safety standards.</p>
+                    </div>
+                </div>
+
+                <div class="project-card scale-in" style="cursor: default;">
+                    <div style="padding: 40px; background: linear-gradient(135deg, #001f4d 0%, #003d7a 100%); color: #fff; border-radius: 12px 12px 0 0;">
+                        <i class="fas fa-users" style="font-size: 2.5rem; color: #ffd700; margin-bottom: 12px; display: block;"></i>
+                        <h3>Trusted Local Suppliers & Labour</h3>
+                    </div>
+                    <div class="project-info">
+                        <p>We maintain relationships with reliable local suppliers and skilled tradespeople. No middlemen, fair pricing, quality delivery.</p>
+                    </div>
+                </div>
+
+                <div class="project-card scale-in" style="cursor: default;">
+                    <div style="padding: 40px; background: linear-gradient(135deg, #001f4d 0%, #003d7a 100%); color: #fff; border-radius: 12px 12px 0 0;">
+                        <i class="fas fa-phone" style="font-size: 2.5rem; color: #ffd700; margin-bottom: 12px; display: block;"></i>
+                        <h3>Always Available</h3>
+                    </div>
+                    <div class="project-info">
+                        <p>Multiple communication channels (phone, WhatsApp, email). We're available to answer questions and resolve issues promptly.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="about.html" class="btn btn-yellow shine-effect" style="margin-right: 12px;">Learn More About Us</a>
+                <a href="tel:+263778754141" class="btn shine-effect">Call for a Free Consultation</a>
             </div>
         </div>
     </section>
@@ -1910,7 +2105,7 @@
             
             <div style="text-align: center; margin-top: 40px;">
                 <a href="tel:+263778754141" class="btn btn-yellow shine-effect">Call to Discuss Your Project</a>
-                <a href="#projects-gallery-modal" class="btn shine-effect" style="margin-left: 15px;">See More Projects</a>
+                <a href="more-projects.html" class="btn shine-effect" style="margin-left: 15px;">See More Projects</a>
             </div>
         </div>
     </section>
@@ -1950,7 +2145,7 @@
                         </div>
                         <div>
                             <h3>Address</h3>
-                            <p>123 Construction Avenue, Building City, BC 12345</p>
+                            <p>No. 623 Hopelyn Estate, Bulawayo, Zimbabwe</p>
                         </div>
                     </div>
                     
@@ -1961,7 +2156,7 @@
                         <div>
                             <h3>Phone</h3>
                             <p><a href="tel:+263778754141" class="phone-link">+263 778 754 141</a></p>
-                            <p style="font-size: 0.9rem; margin-top: 5px;">Available Mon-Fri: 8AM-6PM | Sat: 9AM-2PM</p>
+                            <p style="font-size: 0.9rem; margin-top: 5px;">Available Sun-Thu: 8AM-6PM | Fri: 8AM-1PM</p>
                         </div>
                     </div>
                     
@@ -1981,7 +2176,7 @@
                         </div>
                         <div>
                             <h3>Business Hours</h3>
-                            <p>Monday - Friday: 8:00 AM - 6:00 PM<br>Saturday: 9:00 AM - 2:00 PM</p>
+                            <p>Sunday - Thursday: 8:00 AM - 6:00 PM<br>Friday: 8:00 AM - 1:00 PM</p>
                         </div>
                     </div>
                     
@@ -2293,9 +2488,10 @@
             }
         `;
         document.head.appendChild(rippleStyle);
-    </script>
+        
+   
+        // ===== WHATSAPP FLOATING BUTTON FUNCTIONALITY =====
 
-    <script>
         // WhatsApp button functionality
         const whatsappBtn = document.querySelector('.whatsapp-float');
         
@@ -2437,6 +2633,19 @@
             });
         });
 
+        // Make entire project card clickable to open the gallery
+        // Ignore clicks on links or buttons inside the card so default behaviors remain
+        const projectCardsClickable = document.querySelectorAll('.project-card');
+        projectCardsClickable.forEach(card => {
+            card.addEventListener('click', (e) => {
+                if (e.target.closest('a') || e.target.closest('button')) return;
+                const projectId = card.getAttribute('data-project-id');
+                if (projectId != null) {
+                    openProjectModal(projectId);
+                }
+            });
+        });
+
         function openProjectModal(projectId) {
             currentProjectId = parseInt(projectId);
             currentModalSlide = 0;
@@ -2486,6 +2695,15 @@
             });
         }
 
+        // Page Loader Functionality
+        window.addEventListener('load', function() {
+            const pageLoader = document.getElementById('pageLoader');
+            if (pageLoader) {
+                setTimeout(function() {
+                    pageLoader.classList.add('hidden');
+                }, 500);
+            }
+        });
         function nextSlide() {
             const project = projectsData[currentProjectId];
             currentModalSlide = (currentModalSlide + 1) % project.images.length;
@@ -2559,6 +2777,37 @@
                 document.body.style.overflow = 'hidden';
             });
         }
+
+        // Rotating Headline Functionality
+        const headlines = [
+            'Building Your Vision, Constructing Excellence',
+            'Build Back Home from Anywhere — We Manage Your Project',
+            'Professional Construction Services for the Diaspora',
+            'Quality Projects, Transparent Costs, Trusted Delivery'
+        ];
+
+        let currentHeadlineIndex = 0;
+        const headlineElement = document.getElementById('rotatingHeadline');
+
+        function rotateHeadline() {
+            if (!headlineElement) return;
+
+            // Add fade-out animation
+            headlineElement.classList.add('fade-out');
+
+            // Change text after fade-out completes
+            setTimeout(() => {
+                currentHeadlineIndex = (currentHeadlineIndex + 1) % headlines.length;
+                headlineElement.textContent = headlines[currentHeadlineIndex];
+                headlineElement.classList.remove('fade-out');
+            }, 300);
+        }
+
+        // Rotate headline every 6 seconds
+        if (headlineElement) {
+            setInterval(rotateHeadline, 6000);
+        }
     </script>
+
 </body>
 </html>
