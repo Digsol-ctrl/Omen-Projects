@@ -1,36 +1,129 @@
 backend:
   name: git-gateway
-  branch: master
-media_folder: "images"
-public_folder: "/images"
-site_url: ""
+  branch: main
+  squash_merges: true
+  commit_messages:
+    create: 'Create {{collection}}: "{{slug}}"'
+    update: 'Update {{collection}}: "{{slug}}"'
+    delete: 'Delete {{collection}}: "{{slug}}"'
+    uploadMedia: 'Upload "{{path}}"'
+    deleteMedia: 'Delete "{{path}}"'
 
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+site_url: "https://omenprojects.netlify.app"
+logo_url: "/logo.jpg"
+
+# Collections for managing content with images
 collections:
+  # Gallery/Projects collection (stored as Markdown with frontmatter)
+  - name: "gallery"
+    label: "Project Gallery"
+    folder: "content/gallery"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    identifier_field: "title"
+    format: "frontmatter"
+    fields:
+      - {label: "Project Title", name: "title", widget: "string", required: true}
+      - {label: "Slug", name: "slug", widget: "string"}
+      - {label: "Category", name: "category", widget: "select", options: ["Commercial", "Residential", "Renovation"], required: true}
+      - {label: "Location", name: "location", widget: "string"}
+      - {label: "Description", name: "body", widget: "markdown", required: false}
+      - {label: "Featured Image", name: "featured_image", widget: "image", required: true}
+      - {label: "Gallery Images", name: "gallery_images", widget: "list", required: false, fields:
+          - {label: "Image", name: "image", widget: "image"}
+          - {label: "Caption", name: "caption", widget: "string", required: false}
+      }
+      - {label: "Completion Date", name: "completion_date", widget: "datetime", format: "YYYY-MM-DD", required: false}
+      - {label: "Status", name: "status", widget: "select", options: ["In Progress", "Completed", "Upcoming"], default: "Completed"}
+
+  # Testimonials collection
+  - name: "testimonials"
+    label: "Testimonials"
+    folder: "content/testimonials"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - {label: "Client Name", name: "title", widget: "string", required: true}
+      - {label: "Project Title", name: "project", widget: "string"}
+      - {label: "Rating", name: "rating", widget: "select", options: ["5", "4", "3"], default: "5"}
+      - {label: "Testimonial", name: "body", widget: "markdown", required: true}
+      - {label: "Client Photo", name: "client_photo", widget: "image", required: false}
+      - {label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", required: false}
+
+  # Blog/Updates collection
+  - name: "updates"
+    label: "News & Updates"
+    folder: "content/updates"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - {label: "Title", name: "title", widget: "string", required: true}
+      - {label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", required: true}
+      - {label: "Featured Image", name: "featured_image", widget: "image", required: false}
+      - {label: "Content", name: "body", widget: "markdown", required: true}
+      - {label: "Tags", name: "tags", widget: "list", required: false}
+      - {label: "Published", name: "published", widget: "boolean", default: true}
+
+  # Services configuration (editable list)
   - name: "services"
     label: "Services"
-    folder: "data"
+    folder: "content/services"
     create: true
     slug: "{{slug}}"
-    identifier_field: "title"
+    extension: "md"
+    format: "frontmatter"
     fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "ID", name: "id", widget: "string"}
-      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Service Name", name: "title", widget: "string", required: true}
+      - {label: "Icon Class", name: "icon", widget: "string", required: false, hint: "Font Awesome class, e.g., fa-building"}
+      - {label: "Description", name: "body", widget: "markdown", required: true}
+      - {label: "Service Image", name: "image", widget: "image", required: false}
 
-  - name: "projects"
-    label: "Projects"
-    folder: "data"
+  # Team Members collection
+  - name: "team"
+    label: "Team Members"
+    folder: "content/team"
     create: true
     slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
     fields:
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "ID", name: "id", widget: "string"}
-      - {label: "Location", name: "location", widget: "string"}
-      - {label: "Images", name: "images", widget: "list", allow_add: true, field: {label: "Image", name: "image", widget: "image"}}
+      - {label: "Name", name: "title", widget: "string", required: true}
+      - {label: "Position", name: "position", widget: "string", required: true}
+      - {label: "Bio", name: "body", widget: "markdown", required: false}
+      - {label: "Photo", name: "photo", widget: "image", required: true}
+      - {label: "Email", name: "email", widget: "string", required: false}
+      - {label: "Phone", name: "phone", widget: "string", required: false}
 
-files:
-  - label: "Services JSON"
-    name: "services_json"
-    file: "data/services.json"
-    fields:
-      - {label: "Services", name: "services", widget: "list", fields: [{label: "Title", name: "title", widget: "string"},{label: "ID", name: "id", widget: "string"},{label: "Description", name: "description", widget: "text"}]}
+  # Settings file for site-wide content
+  - label: "Site Settings"
+    name: "settings"
+    files:
+      - label: "Company Info"
+        name: "company"
+        file: "data/company.json"
+        fields:
+          - {label: "Company Name", name: "name", widget: "string"}
+          - {label: "Tagline", name: "tagline", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Phone", name: "phone", widget: "string"}
+          - {label: "Email", name: "email", widget: "string"}
+          - {label: "Address", name: "address", widget: "string"}
+          - {label: "Logo URL", name: "logo", widget: "image"}
+          - {label: "Business Hours", name: "hours", widget: "text"}
+
+      - label: "Homepage Hero"
+        name: "hero"
+        file: "data/hero.json"
+        fields:
+          - {label: "Hero Title", name: "title", widget: "string"}
+          - {label: "Hero Subtitle", name: "subtitle", widget: "string"}
+          - {label: "Hero Image", name: "image", widget: "image"}
+          - {label: "CTA Button Text", name: "cta_text", widget: "string"}
+          - {label: "CTA Button URL", name: "cta_url", widget: "string"}

@@ -1,0 +1,49 @@
+# Netlify Configuration for Omen Projects Static Site + Decap CMS
+
+[build]
+  # No build command needed for static HTML/CSS/JS site
+  command = ""
+  publish = "."
+
+[context.production]
+  command = ""
+  publish = "."
+
+# Redirect rules for SPA-like behavior
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Enable Netlify Identity for authentication
+[functions]
+  directory = "functions"
+
+# Headers for security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/images/uploads/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "*.{js,css,jpg,png,gif,webp,svg}"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Environment variables (set in Netlify dashboard)
+# INCOMING_HOOK_TITLE = "Omen Projects"
+# (Netlify Identity and Git Gateway are enabled via dashboard)

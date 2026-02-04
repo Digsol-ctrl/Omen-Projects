@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Omen Projects — Content Manager</title>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+      }
+      .cms-wrapper {
+        min-height: 100vh;
+      }
+      /* Override default CMS styling for branding */
+      .nc-root {
+        font-family: inherit;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cms-wrapper"></div>
+    <script>
+      // Redirect to login if not authenticated
+      if (window.location.hostname !== 'localhost') {
+        if (!window.netlifyIdentity) {
+          console.error('Netlify Identity widget is required for authentication');
+        }
+        window.netlifyIdentity.on('init', user => {
+          if (!user) {
+            window.netlifyIdentity.open();
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
