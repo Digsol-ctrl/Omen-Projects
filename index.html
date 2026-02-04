@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
     <style>
         :root {
             --primary-blue: #1e90ff; /* Water Blue */
@@ -211,6 +212,7 @@
         .slide-in-left.visible {
             opacity: 1;
             transform: translateX(0);
+            flex: 1;
         }
         
         .slide-in-right {
@@ -251,10 +253,18 @@
         .rotating-headline.fade-out {
             animation: fadeOutDown 0.6s ease-in-out;
         }
+
+        /* Parallax Mobile Fallback */
+        @media (max-width: 768px) {
+            .hero {
+                background-attachment: scroll !important;
+            }
+        }
         
         .slide-in-right.visible {
             opacity: 1;
             transform: translateX(0);
+            flex: 1;
         }
         
         .scale-in {
@@ -477,6 +487,7 @@
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
             color: white;
             text-align: center;
             padding: 180px 0 100px;
@@ -1697,6 +1708,177 @@
                 font-size: 2rem;
             }
         }
+        /* Video autoplay + unmute overlay styles */
+        /* Video Section Animations */
+        @keyframes videoFadeIn {
+            0% { opacity: 0; transform: translateY(60px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes videoBorderPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.7), 0 15px 40px rgba(0, 31, 77, 0.15); }
+            50% { box-shadow: 0 0 0 15px rgba(255, 204, 0, 0), 0 15px 40px rgba(0, 31, 77, 0.3); }
+        }
+
+        @keyframes videoGlow {
+            0%, 100% { filter: drop-shadow(0 0 8px rgba(255, 204, 0, 0.4)); }
+            50% { filter: drop-shadow(0 0 20px rgba(255, 204, 0, 0.8)); }
+        }
+
+        @keyframes buttonPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { border-color: rgba(255, 204, 0, 0.3); }
+            50% { border-color: rgba(255, 204, 0, 0.8); }
+        }
+
+        .video-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f9fafb 0%, #f0f4f8 50%, #f9fafb 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(30, 144, 255, 0.03) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 50%, rgba(255, 204, 0, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .video-section .section-title {
+            position: relative;
+            z-index: 1;
+        }
+
+        .video-container {
+            position: relative;
+            max-width: 1100px;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 31, 77, 0.15);
+            animation: videoFadeIn 0.8s ease-out, videoBorderPulse 4s ease-in-out 0.5s infinite;
+            border: 2px solid rgba(255, 204, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+            backdrop-filter: blur(0px);
+        }
+
+        .video-container:hover {
+            animation: videoGlow 3s ease-in-out infinite;
+            border-color: rgba(255, 204, 0, 0.5);
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px rgba(0, 31, 77, 0.25), 0 0 40px rgba(30, 144, 255, 0.1);
+        }
+
+        .video-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 3s infinite;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .video-container video {
+            display: block;
+            width: 100%;
+            height: auto;
+            background: #000;
+            transition: all 0.6s ease;
+        }
+
+        .video-container:hover video {
+            filter: brightness(1.05);
+        }
+
+        .unmute-btn {
+            position: absolute;
+            right: 16px;
+            bottom: 16px;
+            background: linear-gradient(135deg, #001f4d 0%, #003d7a 100%);
+            color: #fff;
+            border: 2px solid rgba(255, 204, 0, 0.4);
+            padding: 12px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            transform: translateY(12px) scale(0.8);
+            transition: all 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 10;
+            font-weight: 600;
+            backdrop-filter: blur(8px);
+        }
+
+        .unmute-btn:hover {
+            border-color: rgba(255, 204, 0, 0.8);
+            background: linear-gradient(135deg, #003d7a 0%, #0056b3 100%);
+            box-shadow: 0 12px 32px rgba(30, 144, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            transform: translateY(8px) scale(1.1);
+        }
+
+        .unmute-btn:active {
+            transform: translateY(10px) scale(0.95);
+        }
+
+        .unmute-btn.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            animation: buttonPulse 2s ease-in-out infinite;
+        }
+
+        .unmute-btn:focus {
+            outline: 3px solid rgba(255, 204, 0, 0.6);
+            outline-offset: 2px;
+            box-shadow: 0 0 0 4px rgba(255, 204, 0, 0.1), 0 12px 32px rgba(30, 144, 255, 0.3);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .video-section {
+                padding: 50px 0;
+            }
+
+            .video-container {
+                border-radius: 12px;
+                animation: videoFadeIn 0.8s ease-out, videoBorderPulse 4s ease-in-out 0.5s infinite;
+            }
+
+            .unmute-btn {
+                right: 12px;
+                bottom: 12px;
+                padding: 10px 12px;
+                font-size: 1rem;
+            }
+        }
+
     </style>
 </head>
 
@@ -1770,6 +1952,24 @@
                     <div class="crane-arm"></div>
                     <div class="crane-hook"></div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Showcase (autoplay on scroll) -->
+    <section class="video-section" id="videoShowcase">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="slide-in-left">Project Showcase</h2>
+                <p style="color:#666; margin-top:8px;">Scroll to the video to start playback. If your browser blocks sound autoplay, use the unmute button.</p>
+            </div>
+
+            <div class="video-container scale-in" style="margin-top: 24px;">
+                <video class="autoplay-video" controls playsinline preload="metadata" data-has-sound="true" controlsList="nodownload">
+                    <source src="videos/Omenprojects-video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <button class="unmute-btn" aria-label="Toggle sound">🔊</button>
             </div>
         </div>
     </section>
@@ -1867,26 +2067,8 @@
                     <a href="tel:+263778754141" class="btn shine-effect">Call Us Today</a>
                 </div>
                 
-                <div class="about-stats">
-                    <div class="stat-box scale-in">
-                        <div class="stat-number counter" data-target="18">0</div>
-                        <div class="stat-text">Years of Experience</div>
-                    </div>
-                    
-                    <div class="stat-box scale-in">
-                        <div class="stat-number counter" data-target="250">0</div>
-                        <div class="stat-text">Projects Completed</div>
-                    </div>
-                    
-                    <div class="stat-box scale-in">
-                        <div class="stat-number counter" data-target="50">0</div>
-                        <div class="stat-text">Dedicated Team Members</div>
-                    </div>
-                    
-                    <div class="stat-box scale-in">
-                        <div class="stat-number counter" data-target="100">0</div>
-                        <div class="stat-text">Client Satisfaction</div>
-                    </div>
+                <div class="about-image slide-in-right">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Omen Projects Team" style="width: 100%; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.15);">
                 </div>
             </div>
         </div>
@@ -1897,6 +2079,37 @@
          >
             <a href="about.html" class="btn btn-yellow" style="margin:auto;">More About Us</a>
          </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section style="padding: 60px 0; background: linear-gradient(135deg, rgba(0,31,77,0.05) 0%, rgba(255,204,0,0.05) 100%); border-top: 2px solid #ffd700; border-bottom: 2px solid #ffd700;">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="slide-in-left" style="color: #001f4d;">By The Numbers</h2>
+            </div>
+            
+            <div class="about-stats" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto;">
+                <div class="stat-box scale-in">
+                    <div class="stat-number counter" data-target="18">0</div>
+                    <div class="stat-text">Years of Experience</div>
+                </div>
+                
+                <div class="stat-box scale-in">
+                    <div class="stat-number counter" data-target="250">0</div>
+                    <div class="stat-text">Projects Completed</div>
+                </div>
+                
+                <div class="stat-box scale-in">
+                    <div class="stat-number counter" data-target="50">0</div>
+                    <div class="stat-text">Dedicated Team Members</div>
+                </div>
+                
+                <div class="stat-box scale-in">
+                    <div class="stat-number counter" data-target="100">0</div>
+                    <div class="stat-text">Client Satisfaction %</div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Team Section -->
@@ -1946,8 +2159,9 @@
     </section>
 
     <!-- Diaspora Market Section -->
-    <section style="padding: 80px 0; background: linear-gradient(135deg, rgba(0,31,77,0.05) 0%, rgba(255,204,0,0.05) 100%); border-top: 2px solid #ffd700;">
-        <div class="container">
+    <section style="padding: 80px 0; background: linear-gradient(135deg, rgba(0,31,77,0.05) 0%, rgba(255,204,0,0.05) 100%), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80'); background-attachment: fixed; background-size: cover; background-position: center; border-top: 2px solid #ffd700; position: relative;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.22); z-index: 0;"></div>
+        <div class="container" style="position: relative; z-index: 1;">
             <div class="section-title">
                 <h2 class="slide-in-left" style="color: #001f4d;">Building for the Diaspora</h2>
                 <p style="color: #666; font-size: 1.1rem; margin-top: 10px;">Your trusted partner for construction projects managed from abroad</p>
@@ -2018,6 +2232,24 @@
             <div style="text-align: center; margin-top: 40px;">
                 <a href="about.html" class="btn btn-yellow shine-effect" style="margin-right: 12px;">Learn More About Us</a>
                 <a href="tel:+263778754141" class="btn shine-effect">Call for a Free Consultation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Second Video (placed after Diaspora) -->
+    <section class="video-section" id="projectVideo" style="padding-top: 40px; padding-bottom: 40px;">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="slide-in-left">Project Walkthrough</h2>
+                <p style="color:#666; margin-top:8px;">A quick walkthrough video — scroll to view and tap the sound button to enable audio if needed.</p>
+            </div>
+
+            <div class="video-container scale-in" style="margin-top: 24px;">
+                <video class="autoplay-video" controls playsinline preload="metadata" data-has-sound="true" controlsList="nodownload">
+                    <source src="videos/On a _ChooseDay _ Choose Omen Projects__followers - 2102886667148695(HD).mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <button class="unmute-btn" aria-label="Toggle sound">🔊</button>
             </div>
         </div>
     </section>
@@ -2807,6 +3039,76 @@
         if (headlineElement) {
             setInterval(rotateHeadline, 6000);
         }
+
+        // Autoplay-on-scroll for videos with unmute fallback
+        (function() {
+            const videos = document.querySelectorAll('.autoplay-video');
+            if (!videos.length) return;
+
+            const observerOpts = { threshold: [0.5] };
+
+            function showUnmute(video) {
+                const btn = video.closest('.video-container')?.querySelector('.unmute-btn');
+                if (btn) btn.classList.add('visible');
+            }
+
+            function hideUnmute(video) {
+                const btn = video.closest('.video-container')?.querySelector('.unmute-btn');
+                if (btn) btn.classList.remove('visible');
+            }
+
+            const vidObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const v = entry.target;
+                    if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+                        // Try to play (may be blocked if sound is present)
+                        const p = v.play();
+                        if (p !== undefined) {
+                            p.then(() => {
+                                if (v.muted) showUnmute(v); else hideUnmute(v);
+                            }).catch(() => {
+                                // Autoplay with sound blocked -> mute and try again, then show unmute
+                                v.muted = true;
+                                v.play().catch(()=>{});
+                                showUnmute(v);
+                            });
+                        }
+                    } else {
+                        try { v.pause(); } catch (e) { /* ignore */ }
+                    }
+                });
+            }, observerOpts);
+
+            videos.forEach(v => {
+                v.playsInline = true;
+                vidObserver.observe(v);
+
+                const btn = v.closest('.video-container')?.querySelector('.unmute-btn');
+                if (btn) {
+                    // Initialize button state
+                    btn.innerText = v.muted ? '🔇' : '🔊';
+                    btn.addEventListener('click', () => {
+                        v.muted = !v.muted;
+                        btn.innerText = v.muted ? '🔇' : '🔊';
+                        if (!v.muted) {
+                            v.play().catch(()=>{});
+                            btn.classList.remove('visible');
+                        } else {
+                            btn.classList.add('visible');
+                        }
+                    });
+                }
+
+                // Update button visibility when volume changes
+                v.addEventListener('volumechange', () => {
+                    const b = v.closest('.video-container')?.querySelector('.unmute-btn');
+                    if (b) {
+                        if (v.muted) { b.classList.add('visible'); b.innerText = '🔇'; }
+                        else { b.classList.remove('visible'); b.innerText = '🔊'; }
+                    }
+                });
+            });
+        })();
     </script>
 
 </body>
