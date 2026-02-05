@@ -8,16 +8,6 @@
 [context.production]
   command = ""
   publish = "."
-# Netlify Configuration for Omen Projects Static Site + Decap CMS
-
-[build]
-  # No build command needed for static HTML/CSS/JS site
-  command = ""
-  publish = "."
-
-[context.production]
-  command = ""
-  publish = "."
 
 # Redirect rules for SPA-like behavior
 [[redirects]]
@@ -25,7 +15,7 @@
   to = "/index.html"
   status = 200
 
-# Enable Netlify Identity for authentication
+# Enable Netlify Identity for authentication (managed in dashboard)
 [functions]
   directory = "functions"
 
@@ -54,6 +44,4 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# Environment variables (set in Netlify dashboard)
-# INCOMING_HOOK_TITLE = "Omen Projects"
-# (Netlify Identity and Git Gateway are enabled via dashboard)
+# Environment variables are set in the Netlify dashboard, not here
