@@ -10,6 +10,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Omen Projects | Beyond Expectation</title>
+    <script>
+        (function() {
+            try {
+                var hash = window.location.hash || '';
+                if (hash.indexOf('invite_token=') !== -1 || hash.indexOf('recovery_token=') !== -1) {
+                    if (!window.location.pathname.startsWith('/admin')) {
+                        // preserve origin and hash, redirect to /admin/
+                        var target = (window.location.origin || window.location.protocol + '//' + window.location.host) + '/admin/' + hash;
+                        window.location.replace(target);
+                    }
+                }
+            } catch (e) {
+                console.error('Invite redirect error', e);
+            }
+        })();
+    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">

@@ -30,17 +30,74 @@
   <body>
     <div class="cms-wrapper"></div>
     <script>
-      // Redirect to login if not authenticated
-      if (window.location.hostname !== 'localhost') {
+      // Handle authentication flow properly
+      (function() {
+        // Check if this is an invite link
+        const params = new URLSearchParams(window.location.hash.substring(1));
+        const inviteToken = params.get('invite_token');
+        const recoveryToken = params.get('recovery_token');
+        
         if (!window.netlifyIdentity) {
           console.error('Netlify Identity widget is required for authentication');
+          return;
         }
-        window.netlifyIdentity.on('init', user => {
-          if (!user) {
-            window.netlifyIdentity.open();
-          }
+
+        // Initialize netlify identity
+        window.netlifyIdentity.init();
+
+        // Handle invite token - show signup modal
+        if (inviteToken) {
+          window.netlifyIdentity.on('init', user => {
+            if (!user) {
+              // Open identity widget for signup/invite acceptance
+              window.netlifyIdentity.open('signup');
+            } else {
+              // Already logged in, load CMS
+              return;
+            }
+          });
+        }
+        // Handle recovery/reset tokens
+        else if (recoveryToken) {
+          window.netlifyIdentity.on('init', user => {
+            if (!user) {
+              window.netlifyIdentity.open('recovery');
+            }
+          });
+        }
+        // Normal authentication flow
+        else {
+          window.netlifyIdentity.on('init', user => {
+            if (!user) {
+              // No user logged in, open login modal
+              if (window.location.hostname !== 'localhost') {
+                window.netlifyIdentity.open('login');
+              }
+            }
+          });
+        }
+
+        // Redirect after successful authentication
+        window.netlifyIdentity.on('login', user => {
+          // User successfully logged in, load CMS (it's already loaded)
+          console.log('User logged in:', user.email);
         });
-      }
+
+        // Handle sign up
+        window.netlifyIdentity.on('signup', user => {
+          console.log('User signed up:', user.email);
+        });
+
+        // Close modal on logout
+        window.netlifyIdentity.on('logout', () => {
+          window.netlifyIdentity.open('login');
+        });
+
+        // Handle errors
+        window.netlifyIdentity.on('error', err => {
+          console.error('Netlify Identity error:', err);
+        });
+      })();
     </script>
   </body>
 </html>
