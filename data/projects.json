@@ -1,35 +1,25 @@
-[
-  {
-    "id": "project-001",
-    "title": "Riverside Luxury Apartments",
-    "location": "Harare",
-    "images": [
-      "images/project-001-01.svg",
-      "images/project-001-02.svg",
-      "images/project-001-03.svg",
-      "images/project-001-04.svg",
-      "images/project-001-05.svg",
-      "images/project-001-06.svg"
-    ]
-  },
-  {
-    "id": "project-002",
-    "title": "Skyline Business Center",
-    "location": "Bulawayo",
-    "images": [
-      "images/project-002-01.svg",
-      "images/project-002-02.svg",
-      "images/project-002-03.svg"
-    ]
-  },
-  {
-    "id": "project-003",
-    "title": "Heritage Bank Restoration",
-    "location": "Gweru",
-    "images": [
-      "images/project-003-01.svg",
-      "images/project-003-02.svg",
-      "images/project-003-03.svg"
-    ]
-  }
-]
+{
+  "projects": [
+    {
+      "id": "project-001",
+      "title": "Riverside Luxury Apartments",
+      "location": "Harare",
+      "description": "Luxury riverside apartments with modern finishes.",
+      "images": [
+        "/images/project-001-01.svg",
+        "/images/project-001-02.svg",
+        "/images/project-001-03.svg"
+      ]
+    },
+    {
+      "id": "project-002",
+      "title": "Skyline Business Center",
+      "location": "Bulawayo",
+      "description": "Contemporary office complex in the city center.",
+      "images": [
+        "/images/project-002-01.svg",
+        "/images/project-002-02.svg"
+      ]
+    }
+  ]
+}

@@ -199,14 +199,15 @@ async function loadProjects() {
   try {
     const response = await fetch(projectsUrl);
     const data = await response.json();
+    const projectsArray = Array.isArray(data) ? data : (Array.isArray(data.projects) ? data.projects : []);
     
-    if (data.projects && Array.isArray(data.projects)) {
+    if (projectsArray && projectsArray.length) {
       const projectsList = document.getElementById('projectsList');
       const carousel = document.getElementById('projectCarousel');
-      
+
       // Featured carousel
       if (carousel) {
-        data.projects.forEach((project) => {
+        projectsArray.forEach((project) => {
           if (project.images && project.images.length > 0) {
             const img = document.createElement('img');
             img.src = project.images[0];
@@ -215,10 +216,10 @@ async function loadProjects() {
           }
         });
       }
-      
+
       // Grid
       if (projectsList) {
-        data.projects.forEach((project, idx) => {
+        projectsArray.forEach((project, idx) => {
           const card = document.createElement('div');
           card.className = 'project-card scale-in';
           card.style.animationDelay = `${idx * 0.15}s`;
@@ -237,7 +238,7 @@ async function loadProjects() {
           projectsList.appendChild(card);
         });
       }
-      
+
       observeElements();
     }
   } catch (e) {
@@ -253,7 +254,8 @@ async function openProjectModal(projectId) {
   try {
     const response = await fetch(projectsUrl);
     const data = await response.json();
-    const project = data.projects.find(p => p.id === projectId);
+    const projectsArray = Array.isArray(data) ? data : (Array.isArray(data.projects) ? data.projects : []);
+    const project = projectsArray.find(p => p.id === projectId);
     
     if (project) {
       const carousel = modal.querySelector('#projectCarousel');

@@ -47,38 +47,6 @@ collections:
       - {label: "Completion Date", name: "completion_date", widget: "datetime", format: "YYYY-MM-DD", required: false}
       - {label: "Status", name: "status", widget: "select", options: ["In Progress", "Completed", "Upcoming"], default: "Completed"}
 
-  # Testimonials collection
-  - name: "testimonials"
-    label: "Testimonials"
-    folder: "content/testimonials"
-    create: true
-    slug: "{{slug}}"
-    extension: "md"
-    format: "frontmatter"
-    fields:
-      - {label: "Client Name", name: "title", widget: "string", required: true}
-      - {label: "Project Title", name: "project", widget: "string"}
-      - {label: "Rating", name: "rating", widget: "select", options: ["5", "4", "3"], default: "5"}
-      - {label: "Testimonial", name: "body", widget: "markdown", required: true}
-      - {label: "Client Photo", name: "client_photo", widget: "image", required: false}
-      - {label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", required: false}
-
-  # Blog/Updates collection
-  - name: "updates"
-    label: "News & Updates"
-    folder: "content/updates"
-    create: true
-    slug: "{{slug}}"
-    extension: "md"
-    format: "frontmatter"
-    fields:
-      - {label: "Title", name: "title", widget: "string", required: true}
-      - {label: "Publish Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", required: true}
-      - {label: "Featured Image", name: "featured_image", widget: "image", required: false}
-      - {label: "Content", name: "body", widget: "markdown", required: true}
-      - {label: "Tags", name: "tags", widget: "list", required: false}
-      - {label: "Published", name: "published", widget: "boolean", default: true}
-
   # Services configuration (editable list)
   - name: "services"
     label: "Services"
@@ -135,3 +103,32 @@ collections:
           - {label: "Hero Image", name: "image", widget: "image"}
           - {label: "CTA Button Text", name: "cta_text", widget: "string"}
           - {label: "CTA Button URL", name: "cta_url", widget: "string"}
+
+    # File-based collection for site projects (editable JSON)
+    - label: "Projects Data"
+      name: "projects-data"
+      files:
+        - label: "Projects"
+          name: "projects"
+          file: "data/projects.json"
+          fields:
+            - label: "Projects"
+              name: "projects"
+              widget: "list"
+              fields:
+                - label: "ID"
+                  name: "id"
+                  widget: "string"
+                - label: "Title"
+                  name: "title"
+                  widget: "string"
+                - label: "Location"
+                  name: "location"
+                  widget: "string"
+                - label: "Images"
+                  name: "images"
+                  widget: "list"
+                  field:
+                    label: "Image"
+                    name: "image"
+                    widget: "image"
