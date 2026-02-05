@@ -104,31 +104,31 @@ collections:
           - {label: "CTA Button Text", name: "cta_text", widget: "string"}
           - {label: "CTA Button URL", name: "cta_url", widget: "string"}
 
-    # File-based collection for site projects (editable JSON)
-    - label: "Projects Data"
-      name: "projects-data"
-      files:
-        - label: "Projects"
-          name: "projects"
-          file: "data/projects.json"
-          fields:
-            - label: "Projects"
-              name: "projects"
-              widget: "list"
-              fields:
-                - label: "ID"
-                  name: "id"
-                  widget: "string"
-                - label: "Title"
-                  name: "title"
-                  widget: "string"
-                - label: "Location"
-                  name: "location"
-                  widget: "string"
-                - label: "Images"
-                  name: "images"
-                  widget: "list"
-                  field:
-                    label: "Image"
+  # File-based collection for site projects (editable JSON)
+  - label: "Projects Data"
+    name: "projects-data"
+    files:
+      - label: "Projects"
+        name: "projects"
+        file: "data/projects.json"
+        fields:
+          - label: "projects"
+            name: "projects"
+            widget: "list"
+            fields:
+              - label: "ID"
+                name: "id"
+                widget: "string"
+              - label: "Title"
+                name: "title"
+                widget: "string"
+              - label: "Location"
+                name: "location"
+                widget: "string"
+              - label: "Images"
+                name: "images"
+                widget: "list"
+                fields:
+                  - label: "Image"
                     name: "image"
                     widget: "image"
