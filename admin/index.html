@@ -39,6 +39,21 @@
         
         if (!window.netlifyIdentity) {
           console.error('Netlify Identity widget is required for authentication');
+          // Show a friendly message so users don't see a blank page (common on preview deploys)
+          const wrapper = document.querySelector('.cms-wrapper');
+          wrapper.innerHTML = '';
+          const msg = document.createElement('div');
+          msg.style.padding = '24px';
+          msg.style.fontFamily = 'sans-serif';
+          msg.style.color = '#222';
+          msg.innerHTML = `
+            <h2>Admin unavailable on this deploy</h2>
+            <p>The Netlify Identity widget failed to load for this preview deploy.</p>
+            <p>Please use the primary site admin instead:</p>
+            <p><a href="https://willowy-tiramisu-d402ad.netlify.app/admin">https://willowy-tiramisu-d402ad.netlify.app/admin</a></p>
+            <p>If you were expecting an invite, open the invite link from the email using the main site domain (<strong>willowy-tiramisu-d402ad.netlify.app</strong>).</p>
+          `;
+          wrapper.appendChild(msg);
           return;
         }
 

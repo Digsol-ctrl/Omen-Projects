@@ -85,7 +85,7 @@ Read **NETLIFY_SETUP_STEPS.md** and:
 4. (Optional) Restrict signups & add OAuth
 
 ### Step 3: Test (2 min)
-- Visit `https://omenprojects.netlify.app/admin`
+- Visit `https://willowy-tiramisu-d402ad.netlify.app/admin`
 - Log in with email
 - Create test content
 - Click Publish → appears live in 1-2 min

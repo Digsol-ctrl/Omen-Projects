@@ -103,7 +103,7 @@ Complete these steps in **https://app.netlify.com** to enable the CMS:
 
 After completing Netlify setup above:
 
-- [ ] Visit `https://omenprojects.netlify.app/admin`
+- [ ] Visit `https://willowy-tiramisu-d402ad.netlify.app/admin`
 - [ ] Log in (with email or OAuth if configured)
 - [ ] Verify **collections appear**:
   - [ ] Project Gallery

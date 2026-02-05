@@ -2,7 +2,7 @@
 
 ## Access the CMS
 ```
-https://omenprojects.netlify.app/admin
+https://willowy-tiramisu-d402ad.netlify.app/admin
 ```
 (Login via Netlify Identity)
 

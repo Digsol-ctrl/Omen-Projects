@@ -11,7 +11,7 @@ backend:
 
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
-site_url: "https://omenprojects.netlify.app"
+site_url: "https://willowy-tiramisu-d402ad.netlify.app"
 logo_url: "/logo.jpg"
 
 # Collections for managing content with images

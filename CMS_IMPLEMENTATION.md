@@ -105,7 +105,7 @@ Example files to show structure:
 
 ### Access
 ```
-https://omenprojects.netlify.app/admin
+https://willowy-tiramisu-d402ad.netlify.app/admin
 ```
 
 ### Workflow

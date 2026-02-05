@@ -3,7 +3,7 @@
 ## Problem
 When inviting users, they receive an email with a link like:
 ```
-https://omenprojects.netlify.app/#invite_token=NEa8s-7omE7HXm31OVPIEA
+https://willowy-tiramisu-d402ad.netlify.app/#invite_token=NEa8s-7omE7HXm31OVPIEA
 ```
 
 But clicking the link just shows a blank/useless page instead of allowing them to set a password.
@@ -47,14 +47,14 @@ if (inviteToken) {
 ## How It Works Now
 
 ### When user clicks invite link:
-1. Link: `https://omenprojects.netlify.app/#invite_token=NEa8s-7...`
+1. Link: `https://willowy-tiramisu-d402ad.netlify.app/#invite_token=NEa8s-7...`
 2. `/admin/index.html` detects the token
 3. Netlify Identity widget opens **signup modal**
 4. User enters password and creates account
 5. User is logged in and can access CMS
 
 ### When user visits `/admin` normally:
-1. Link: `https://omenprojects.netlify.app/admin`
+1. Link: `https://willowy-tiramisu-d402ad.netlify.app/admin`
 2. `/admin/index.html` detects no token
 3. Netlify Identity widget opens **login modal**
 4. Existing user logs in
@@ -129,7 +129,7 @@ To confirm the fix is working:
 
 1. **Visit the admin page:**
    ```
-   https://omenprojects.netlify.app/admin
+   https://willowy-tiramisu-d402ad.netlify.app/admin
    ```
 
 2. **Check browser console** (`F12 → Console`):

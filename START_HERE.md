@@ -22,13 +22,14 @@ Follow **NETLIFY_SETUP_STEPS.md**:
 - [ ] Verify build settings
 
 ### 3️⃣ Test the CMS (2 minutes)
-- Visit `https://omenprojects.netlify.app/admin`
+ Visit `https://willowy-tiramisu-d402ad.netlify.app/admin`
 - Log in with email
 - Create a test project
 - Click Publish → see it live in 1-2 minutes!
-
+| What | URL |
 **Total time: ~10 minutes** ⏱️
-
+| **CMS Admin** | `https://willowy-tiramisu-d402ad.netlify.app/admin` |
+| **Live Site** | `https://willowy-tiramisu-d402ad.netlify.app` |
 ---
 
 ## 📚 Documentation

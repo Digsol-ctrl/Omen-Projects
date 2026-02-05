@@ -65,7 +65,7 @@ omen-projects/
 ## How the CMS Works
 
 ### Authentication Flow
-1. User visits `https://omenprojects.netlify.app/admin`
+1. User visits `https://willowy-tiramisu-d402ad.netlify.app/admin`
 2. Netlify Identity widget redirects to login page
 3. User logs in via email (or OAuth provider)
 4. Granted access to Decap CMS editor

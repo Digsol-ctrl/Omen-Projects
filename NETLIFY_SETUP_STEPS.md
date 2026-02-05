@@ -1,7 +1,7 @@
 # Netlify Dashboard Setup — Step-by-Step
 
 ## Prerequisites
-- Site deployed on Netlify: `https://omenprojects.netlify.app`
+- Site deployed on Netlify: `https://willowy-tiramisu-d402ad.netlify.app`
 - GitHub repository connected
 - Admin access to Netlify account
 
@@ -83,8 +83,8 @@ Publish directory:      .
    - Create OAuth app at https://github.com/settings/developers
    - Use:
      - **Application name**: "Omen Projects CMS"
-     - **Homepage URL**: `https://omenprojects.netlify.app`
-     - **Authorization callback URL**: `https://omenprojects.netlify.app/.netlify/identity/callback`
+   - **Homepage URL**: `https://willowy-tiramisu-d402ad.netlify.app`
+   - **Authorization callback URL**: `https://willowy-tiramisu-d402ad.netlify.app/.netlify/identity/callback`
    - Copy **Client ID** and **Client Secret** into Netlify form
 3. Click **Save**
 
@@ -113,7 +113,7 @@ Publish directory:      .
 ## Testing the CMS
 
 ### Test it works:
-1. Go to `https://omenprojects.netlify.app/admin`
+1. Go to `https://willowy-tiramisu-d402ad.netlify.app/admin`
 2. Login (email or OAuth if configured)
 3. You should see Decap CMS dashboard
 4. Collections visible: Gallery, Testimonials, Updates, Services, Team, Settings
@@ -170,7 +170,7 @@ Publish directory:      .
 
 | Action | Link |
 |--------|------|
-| **Go to CMS** | https://omenprojects.netlify.app/admin |
+| **Go to CMS** | https://willowy-tiramisu-d402ad.netlify.app/admin |
 | **Site Dashboard** | https://app.netlify.com/sites/omenprojects-netlify-app |
 | **Identity Settings** | https://app.netlify.com → Site → Settings → Identity |
 | **Git Gateway** | https://app.netlify.com → Site → Settings → Identity → Services |
@@ -187,7 +187,7 @@ Some CMS features may require environment variables. To set them:
 2. Click **Edit variables**
 3. Add key-value pairs:
    ```
-   DECAP_CMS_SITE_URL = https://omenprojects.netlify.app
+   DECAP_CMS_SITE_URL = https://willowy-tiramisu-d402ad.netlify.app
    ```
 4. Click **Save**
 

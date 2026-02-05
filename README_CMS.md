@@ -71,7 +71,7 @@ Complete, production-ready CMS setup with:
 ## 🚀 How It Works
 
 ### User Workflow
-1. **Content Editor** visits `https://omenprojects.netlify.app/admin`
+1. **Content Editor** visits `https://willowy-tiramisu-d402ad.netlify.app/admin`
 2. **Logs in** via Netlify Identity (email or OAuth)
 3. **Creates/edits content** using visual editor
 4. **Uploads images** via CMS (auto-saved to `/images/uploads/`)
