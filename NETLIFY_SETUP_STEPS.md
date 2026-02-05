@@ -101,6 +101,7 @@ Publish directory:      .
 ## Step 7: Invite Team Members (If Desired)
 
 ### In **Site settings** → **Identity**:
+
 1. Click **Invite users** button
 2. Enter team member email address
 3. Click **Send invite**
@@ -191,6 +192,45 @@ Some CMS features may require environment variables. To set them:
 4. Click **Save**
 
 *Usually not needed for static sites.*
+
+---
+
+## Minimize Deploys and Redeploys
+
+If you want to reduce build/deploy activity (to save credits and avoid unnecessary redeploys), apply these controls and use the CLI for controlled production updates.
+
+- **Disable automatic production builds:** In the Netlify site dashboard go to `Site settings` → `Build & deploy` → `Continuous Deployment` and turn **Off** automatic builds for the production branch. This prevents every push from triggering a build.
+- **Disable deploy previews:** In `Build & deploy` disable deploy previews for pull requests so preview builds are not created automatically.
+- **Require PR reviews / protect the branch:** On GitHub enable branch protection for `main` so merges require an approved pull request — this avoids accidental merges that trigger deploys.
+- **Limit team deploy permissions:** In `Site` → `Team` adjust roles so only trusted users can trigger deploys.
+- **Use manual CLI deploys for production:** Build locally and deploy artifacts with the Netlify CLI only when ready:
+
+```powershell
+npm install -g netlify-cli
+netlify login
+netlify link --name omen-projects
+netlify deploy --dir=. --prod
+```
+
+- **Ensure upload folder exists:** Your `admin/config.yml` uses `images/uploads` — keep that folder in the repo so CMS uploads succeed.
+- **Reduce expensive CI steps:** Move heavy image processing or long build steps to offline/local processes when possible.
+- **Request enforced spending controls:** Netlify doesn't provide a user-set hard spending cap; contact Netlify Support or Sales to request an enforced limit or prepaid arrangement.
+
+### Sample `netlify.toml`
+
+Add this to the repository root to make the publish directory and build behavior explicit for Netlify:
+
+```
+[build]
+   command = ""
+   publish = "."
+
+[context.production]
+   command = ""
+   publish = "."
+```
+
+Add the `netlify.toml` file to the repo if it doesn't already exist.
 
 ---
 

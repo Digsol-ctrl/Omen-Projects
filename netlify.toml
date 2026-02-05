@@ -1,3 +1,13 @@
+## Netlify config: explicit publish dir and no build command
+## Keeps Netlify from running unexpected builds for this static repo
+
+[build]
+  command = ""
+  publish = "."
+
+[context.production]
+  command = ""
+  publish = "."
 # Netlify Configuration for Omen Projects Static Site + Decap CMS
 
 [build]
