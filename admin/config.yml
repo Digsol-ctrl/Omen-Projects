@@ -16,36 +16,37 @@ logo_url: "/logo.jpg"
 
 # Collections for managing content with images
 collections:
-  # Gallery/Projects collection (stored as Markdown with frontmatter)
-  - name: "gallery"
-    label: "Project Gallery"
-    folder: "content/gallery"
-    create: true
-    slug: "{{slug}}"
-    extension: "md"
-    identifier_field: "title"
-    format: "frontmatter"
-    fields:
-      - {label: "Project Title", name: "title", widget: "string", required: true}
-      - {label: "Slug", name: "slug", widget: "string"}
-      - {label: "Category", name: "category", widget: "select", options: ["Commercial", "Residential", "Renovation"], required: true}
-      - {label: "Location", name: "location", widget: "string"}
-      - {label: "Description", name: "body", widget: "markdown", required: false}
-      - {label: "Featured Image", name: "featured_image", widget: "image", required: true}
-      - label: "Gallery Images"
-        name: "gallery_images"
-        widget: "list"
-        required: false
+  # File-based collection for site projects (editable JSON)
+  - label: "Projects Data"
+    name: "projects-data"
+    files:
+      - label: "Projects"
+        name: "projects"
+        file: "data/projects.json"
         fields:
-          - label: "Image"
-            name: "image"
-            widget: "image"
-          - label: "Caption"
-            name: "caption"
-            widget: "string"
-            required: false
-      - {label: "Completion Date", name: "completion_date", widget: "datetime", format: "YYYY-MM-DD", required: false}
-      - {label: "Status", name: "status", widget: "select", options: ["In Progress", "Completed", "Upcoming"], default: "Completed"}
+          - label: "projects"
+            name: "projects"
+            widget: "list"
+            fields:
+              - label: "ID"
+                name: "id"
+                widget: "string"
+              - label: "Title"
+                name: "title"
+                widget: "string"
+              - label: "Location"
+                name: "location"
+                widget: "string"
+              - label: "Description"
+                name: "description"
+                widget: "string"
+              - label: "Images"
+                name: "images"
+                widget: "list"
+                fields:
+                  - label: "Image"
+                    name: "image"
+                    widget: "image"
 
   # Services configuration (editable list)
   - name: "services"
