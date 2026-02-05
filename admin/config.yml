@@ -27,26 +27,35 @@ collections:
           - label: "projects"
             name: "projects"
             widget: "list"
+            allow_add: true
+            collapsed: false
             fields:
               - label: "ID"
                 name: "id"
                 widget: "string"
+                required: false
               - label: "Title"
                 name: "title"
                 widget: "string"
+                required: false
               - label: "Location"
                 name: "location"
                 widget: "string"
+                required: false
               - label: "Description"
                 name: "description"
                 widget: "string"
+                required: false
               - label: "Images"
                 name: "images"
                 widget: "list"
+                allow_add: true
+                required: false
                 fields:
                   - label: "Image"
                     name: "image"
                     widget: "image"
+                    required: false
 
   # Services configuration (editable list)
   - name: "services"
@@ -82,6 +91,7 @@ collections:
   # File-based collection for site projects (editable JSON)
   - label: "Projects Data"
     name: "projects-data"
+    
     files:
       - label: "Projects"
         name: "projects"
