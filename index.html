@@ -16,6 +16,12 @@
                 var hash = window.location.hash || '';
                 if (hash.indexOf('invite_token=') !== -1 || hash.indexOf('recovery_token=') !== -1) {
                     if (!window.location.pathname.startsWith('/admin')) {
+                        // store token in localStorage as a fallback (some redirects strip hashes)
+                        try {
+                            localStorage.setItem('netlify_invite_hash', hash);
+                        } catch (e) {
+                            // ignore storage errors
+                        }
                         // preserve origin and hash, redirect to /admin/
                         var target = (window.location.origin || window.location.protocol + '//' + window.location.host) + '/admin/' + hash;
                         window.location.replace(target);

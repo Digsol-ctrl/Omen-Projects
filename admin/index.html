@@ -32,6 +32,17 @@
     <script>
       // Handle authentication flow properly
       (function() {
+        // Restore invite/recovery token from localStorage if the hash was lost during redirect
+        try {
+          const stored = localStorage.getItem('netlify_invite_hash');
+          if (stored && !window.location.hash) {
+            window.location.hash = stored;
+            localStorage.removeItem('netlify_invite_hash');
+          }
+        } catch (e) {
+          // ignore
+        }
+
         // Check if this is an invite link
         const params = new URLSearchParams(window.location.hash.substring(1));
         const inviteToken = params.get('invite_token');
