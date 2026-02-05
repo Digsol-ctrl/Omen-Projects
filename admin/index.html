@@ -1,131 +1,14 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Omen Projects — Content Manager</title>
-    <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    <script defer src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-                     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        min-height: 100vh;
-      }
-      .cms-wrapper {
-        min-height: 100vh;
-      }
-      /* Override default CMS styling for branding */
-      .nc-root {
-        font-family: inherit;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="cms-wrapper">
-      <div id="nc-root"></div>
-    </div>
-    <script>
-      // Handle authentication flow properly
-      (function() {
-        // Restore invite/recovery token from localStorage if the hash was lost during redirect
-        try {
-          const stored = localStorage.getItem('netlify_invite_hash');
-          if (stored && !window.location.hash) {
-            window.location.hash = stored;
-            localStorage.removeItem('netlify_invite_hash');
-          }
-        } catch (e) {
-          // ignore
-        }
-
-        // Check if this is an invite link
-        const params = new URLSearchParams(window.location.hash.substring(1));
-        const inviteToken = params.get('invite_token');
-        const recoveryToken = params.get('recovery_token');
-        
-        if (!window.netlifyIdentity) {
-          console.error('Netlify Identity widget is required for authentication');
-          // Show a friendly message so users don't see a blank page (common on preview deploys)
-          const wrapper = document.querySelector('.cms-wrapper');
-          wrapper.innerHTML = '';
-          const msg = document.createElement('div');
-          msg.style.padding = '24px';
-          msg.style.fontFamily = 'sans-serif';
-          msg.style.color = '#222';
-          msg.innerHTML = `
-            <h2>Admin unavailable on this deploy</h2>
-            <p>The Netlify Identity widget failed to load for this preview deploy.</p>
-            <p>Please use the primary site admin instead:</p>
-            <p><a href="https://willowy-tiramisu-d402ad.netlify.app/admin">https://willowy-tiramisu-d402ad.netlify.app/admin</a></p>
-            <p>If you were expecting an invite, open the invite link from the email using the main site domain (<strong>willowy-tiramisu-d402ad.netlify.app</strong>).</p>
-          `;
-          wrapper.appendChild(msg);
-          return;
-        }
-
-        // Initialize netlify identity
-        window.netlifyIdentity.init();
-
-        // Handle invite token - show signup modal
-        if (inviteToken) {
-          window.netlifyIdentity.on('init', user => {
-            if (!user) {
-              // Open identity widget for signup/invite acceptance
-              window.netlifyIdentity.open('signup');
-            } else {
-              // Already logged in, load CMS
-              return;
-            }
-          });
-        }
-        // Handle recovery/reset tokens
-        else if (recoveryToken) {
-          window.netlifyIdentity.on('init', user => {
-            if (!user) {
-              window.netlifyIdentity.open('recovery');
-            }
-          });
-        }
-        // Normal authentication flow
-        else {
-          window.netlifyIdentity.on('init', user => {
-            if (!user) {
-              // No user logged in, open login modal
-              if (window.location.hostname !== 'localhost') {
-                window.netlifyIdentity.open('login');
-              }
-            }
-          });
-        }
-
-        // Redirect after successful authentication
-        window.netlifyIdentity.on('login', user => {
-          // User successfully logged in, load CMS (it's already loaded)
-          console.log('User logged in:', user.email);
-        });
-
-        // Handle sign up
-        window.netlifyIdentity.on('signup', user => {
-          console.log('User signed up:', user.email);
-        });
-
-        // Close modal on logout
-        window.netlifyIdentity.on('logout', () => {
-          window.netlifyIdentity.open('login');
-        });
-
-        // Handle errors
-        window.netlifyIdentity.on('error', err => {
-          console.error('Netlify Identity error:', err);
-        });
-      })();
-    </script>
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Content Manager</title>
+  <!-- Decap CMS Script -->
+  <script src="https://unpkg.com@^3.0.0/dist/decap-cms.js"></script>
+</head>
+<body>
+  
+  </script>
+</body>
 </html>
