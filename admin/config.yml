@@ -88,8 +88,7 @@ collections:
       - {label: "Phone", name: "phone", widget: "string", required: false}
 
   
-  # File-based collection for site projects (editable JSON)
-  - label: "Projects Data"
+
     name: "projects-data"
     
     files:
