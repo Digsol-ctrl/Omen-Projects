@@ -32,10 +32,18 @@ collections:
       - {label: "Location", name: "location", widget: "string"}
       - {label: "Description", name: "body", widget: "markdown", required: false}
       - {label: "Featured Image", name: "featured_image", widget: "image", required: true}
-      - {label: "Gallery Images", name: "gallery_images", widget: "list", required: false, fields:
-          - {label: "Image", name: "image", widget: "image"}
-          - {label: "Caption", name: "caption", widget: "string", required: false}
-      }
+      - label: "Gallery Images"
+        name: "gallery_images"
+        widget: "list"
+        required: false
+        fields:
+          - label: "Image"
+            name: "image"
+            widget: "image"
+          - label: "Caption"
+            name: "caption"
+            widget: "string"
+            required: false
       - {label: "Completion Date", name: "completion_date", widget: "datetime", format: "YYYY-MM-DD", required: false}
       - {label: "Status", name: "status", widget: "select", options: ["In Progress", "Completed", "Upcoming"], default: "Completed"}
 
