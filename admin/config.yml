@@ -11,51 +11,41 @@ backend:
 
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
-site_url: "https://willowy-tiramisu-d402ad.netlify.app"
+site_url: "https://omenp.netlify.app"
 logo_url: "/logo.jpg"
 
 # Collections for managing content with images
 collections:
-  # File-based collection for site projects (editable JSON)
-  - label: "Projects Data"
-    name: "projects-data"
-    files:
-      - label: "Projects"
-        name: "projects"
-        file: "data/projects.json"
+  # Gallery/Projects collection (stored as Markdown with frontmatter)
+  - name: "gallery"
+    label: "Project Gallery"
+    folder: "content/gallery"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    identifier_field: "title"
+    format: "frontmatter"
+    fields:
+      - {label: "Project Title", name: "title", widget: "string", required: true}
+      - {label: "Slug", name: "slug", widget: "string"}
+      - {label: "Category", name: "category", widget: "select", options: ["Commercial", "Residential", "Renovation"], required: true}
+      - {label: "Location", name: "location", widget: "string"}
+      - {label: "Description", name: "body", widget: "markdown", required: false}
+      - {label: "Featured Image", name: "featured_image", widget: "image", required: true}
+      - label: "Gallery Images"
+        name: "gallery_images"
+        widget: "list"
+        required: false
         fields:
-          - label: "projects"
-            name: "projects"
-            widget: "list"
-            allow_add: true
-            collapsed: false
-            fields:
-              - label: "ID"
-                name: "id"
-                widget: "string"
-                required: false
-              - label: "Title"
-                name: "title"
-                widget: "string"
-                required: false
-              - label: "Location"
-                name: "location"
-                widget: "string"
-                required: false
-              - label: "Description"
-                name: "description"
-                widget: "string"
-                required: false
-              - label: "Images"
-                name: "images"
-                widget: "list"
-                allow_add: true
-                required: false
-                fields:
-                  - label: "Image"
-                    name: "image"
-                    widget: "image"
-                    required: false
+          - label: "Image"
+            name: "image"
+            widget: "image"
+          - label: "Caption"
+            name: "caption"
+            widget: "string"
+            required: false
+      - {label: "Completion Date", name: "completion_date", widget: "datetime", format: "YYYY-MM-DD", required: false}
+      - {label: "Status", name: "status", widget: "select", options: ["In Progress", "Completed", "Upcoming"], default: "Completed"}
 
   # Services configuration (editable list)
   - name: "services"
@@ -86,33 +76,3 @@ collections:
       - {label: "Photo", name: "photo", widget: "image", required: true}
       - {label: "Email", name: "email", widget: "string", required: false}
       - {label: "Phone", name: "phone", widget: "string", required: false}
-
-  
-
-    name: "projects-data"
-    
-    files:
-      - label: "Projects"
-        name: "projects"
-        file: "data/projects.json"
-        fields:
-          - label: "projects"
-            name: "projects"
-            widget: "list"
-            fields:
-              - label: "ID"
-                name: "id"
-                widget: "string"
-              - label: "Title"
-                name: "title"
-                widget: "string"
-              - label: "Location"
-                name: "location"
-                widget: "string"
-              - label: "Images"
-                name: "images"
-                widget: "list"
-                fields:
-                  - label: "Image"
-                    name: "image"
-                    widget: "image"

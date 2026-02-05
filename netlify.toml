@@ -2,11 +2,11 @@
 ## Keeps Netlify from running unexpected builds for this static repo
 
 [build]
-  command = ""
+  command = "npm run build"
   publish = "."
 
 [context.production]
-  command = ""
+  command = "npm run build"
   publish = "."
 
 # Redirect rules for SPA-like behavior

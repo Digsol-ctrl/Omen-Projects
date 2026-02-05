@@ -1,5 +1,9 @@
 {
+  "scripts": {
+    "build": "node scripts/generate-projects-json.js"
+  },
   "dependencies": {
-    "decap-cms-app": "^3.10.0"
+    "decap-cms-app": "^3.10.0",
+    "gray-matter": "^4.0.3"
   }
 }

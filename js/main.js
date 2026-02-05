@@ -194,6 +194,21 @@ function getServiceIcon(title) {
   return 'building';
 }
 
+// ===== IMAGE NORMALIZATION =====
+// Handle both old schema (images array) and new schema (gallery_images + featured_image)
+function normalizeImages(project) {
+  if (Array.isArray(project.images) && project.images.length) {
+    return project.images;
+  }
+  if (Array.isArray(project.gallery_images) && project.gallery_images.length) {
+    return project.gallery_images.map(g => (typeof g === 'string' ? g : g.image)).filter(Boolean);
+  }
+  if (project.featured_image) {
+    return [project.featured_image];
+  }
+  return ['images/hero.svg'];
+}
+
 // ===== LOAD PROJECTS =====
 async function loadProjects() {
   try {
@@ -243,7 +258,7 @@ async function loadProjects() {
             track.style.width = '100%';
             track.style.transition = 'transform 0.5s ease';
 
-            const imgs = (project.images && project.images.length) ? project.images : ['images/hero.svg'];
+            const imgs = normalizeImages(project);
             imgs.forEach(src => {
               const imgEl = document.createElement('img');
               imgEl.src = src || 'images/hero.svg';
@@ -318,9 +333,10 @@ async function openProjectModal(projectId) {
 
     if (!track || !indicators) return;
 
-    // Populate images
+    // Populate images using normalized schema
     track.innerHTML = '';
-    project.images?.forEach(src => {
+    const imgs = normalizeImages(project);
+    imgs.forEach(src => {
       const img = document.createElement('img');
       img.src = src;
       img.alt = project.title;
@@ -329,8 +345,8 @@ async function openProjectModal(projectId) {
 
     // Build indicators
     indicators.innerHTML = '';
-    const imgs = Array.from(track.querySelectorAll('img'));
-    imgs.forEach((_, i) => {
+    const imgElements = Array.from(track.querySelectorAll('img'));
+    imgElements.forEach((_, i) => {
       const dot = document.createElement('span');
       dot.className = `indicator ${i === 0 ? 'active' : ''}`;
       dot.addEventListener('click', () => {
@@ -356,14 +372,14 @@ async function openProjectModal(projectId) {
     // Attach controls (replace handlers to avoid doubling)
     if (prevBtn) {
       prevBtn.onclick = () => {
-        currentModalSlide = (currentModalSlide - 1 + imgs.length) % imgs.length;
+        currentModalSlide = (currentModalSlide - 1 + imgElements.length) % imgElements.length;
         updateButtons();
       };
     }
 
     if (nextBtn) {
       nextBtn.onclick = () => {
-        currentModalSlide = (currentModalSlide + 1) % imgs.length;
+        currentModalSlide = (currentModalSlide + 1) % imgElements.length;
         updateButtons();
       };
     }

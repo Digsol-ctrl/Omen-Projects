@@ -949,6 +949,20 @@
         // Load projects from data/projects.json (CMS-managed)
         let projectsData = [];
 
+        // Normalize images from both old and new schemas
+        function normalizeImages(project) {
+            if (Array.isArray(project.images) && project.images.length) {
+                return project.images;
+            }
+            if (Array.isArray(project.gallery_images) && project.gallery_images.length) {
+                return project.gallery_images.map(g => (typeof g === 'string' ? g : g.image)).filter(Boolean);
+            }
+            if (project.featured_image) {
+                return [project.featured_image];
+            }
+            return [];
+        }
+
         async function loadProjectsDataFile() {
             try {
                 const res = await fetch('data/projects.json');
@@ -998,7 +1012,7 @@
                 projectCard.className = 'project-card';
                 projectCard.style.animationDelay = (index * 0.1) + 's';
 
-                const imgs = Array.isArray(project.images) ? project.images : [];
+                const imgs = normalizeImages(project);
                 const imagesHtml = imgs.map(img => `<img src="${img}" alt="${project.title}">`).join('');
                 const indicatorsHtml = imgs.map((_, i) => `<span class="indicator ${i === 0 ? 'active' : ''}" onclick="changeCarouselSlide(this, '${project.id}')"></span>`).join('');
                 const categoryLabel = project.category ? (String(project.category).toUpperCase()) : '';
@@ -1083,7 +1097,8 @@
             track.innerHTML = '';
             indicators.innerHTML = '';
 
-            project.images.forEach((img, index) => {
+            const imgs = normalizeImages(project);
+            imgs.forEach((img, index) => {
                 const imgEl = document.createElement('img');
                 imgEl.src = img;
                 imgEl.alt = project.title;
@@ -1118,13 +1133,17 @@
 
         function nextModalSlide() {
             const project = projectsData.find(p => p.id === currentModalProjectId);
-            currentModalSlide = (currentModalSlide + 1) % project.images.length;
+            if (!project) return;
+            const imgs = normalizeImages(project);
+            currentModalSlide = (currentModalSlide + 1) % imgs.length;
             updateModalCarousel();
         }
 
         function prevModalSlide() {
             const project = projectsData.find(p => p.id === currentModalProjectId);
-            currentModalSlide = (currentModalSlide - 1 + project.images.length) % project.images.length;
+            if (!project) return;
+            const imgs = normalizeImages(project);
+            currentModalSlide = (currentModalSlide - 1 + imgs.length) % imgs.length;
             updateModalCarousel();
         }
 
