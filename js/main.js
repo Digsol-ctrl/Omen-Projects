@@ -205,16 +205,11 @@ async function loadProjects() {
       const projectsList = document.getElementById('projectsList');
       const carousel = document.getElementById('projectCarousel');
 
-      // Featured carousel
+      // Clear any existing featured carousel content — we use per-card carousels instead
       if (carousel) {
-        projectsArray.forEach((project) => {
-          if (project.images && project.images.length > 0) {
-            const img = document.createElement('img');
-            img.src = project.images[0];
-            img.alt = project.title;
-            carousel.appendChild(img);
-          }
-        });
+        carousel.innerHTML = '';
+        // hide the featured carousel container so no stray images appear
+        carousel.style.display = 'none';
       }
 
       // Grid
@@ -224,9 +219,13 @@ async function loadProjects() {
           card.className = 'project-card scale-in';
           card.style.animationDelay = `${idx * 0.15}s`;
           card.style.cursor = 'pointer';
+
+          // Card HTML uses a small carousel container
           card.innerHTML = `
             <div class="project-img">
-              <img src="${project.images?.[0] || 'images/hero.svg'}" alt="${project.title}" />
+              <div class="card-carousel">
+                <div class="card-track"></div>
+              </div>
             </div>
             <div class="project-info">
               <h3>${project.title}</h3>
@@ -234,8 +233,59 @@ async function loadProjects() {
               <p>${project.description || 'Premium construction project'}</p>
             </div>
           `;
-          card.addEventListener('click', () => openProjectModal(project.id));
+
+          // Append card first, then populate images and start auto-scroll
           projectsList.appendChild(card);
+
+          const track = card.querySelector('.card-track');
+          if (track) {
+            track.style.display = 'flex';
+            track.style.width = '100%';
+            track.style.transition = 'transform 0.5s ease';
+
+            const imgs = (project.images && project.images.length) ? project.images : ['images/hero.svg'];
+            imgs.forEach(src => {
+              const imgEl = document.createElement('img');
+              imgEl.src = src || 'images/hero.svg';
+              imgEl.alt = project.title;
+              imgEl.style.width = '100%';
+              imgEl.style.flex = '0 0 100%';
+              track.appendChild(imgEl);
+            });
+
+            // Auto-scroll logic per card
+            let currentIdx = 0;
+            const count = track.querySelectorAll('img').length;
+
+            function startCarousel() {
+              if (count <= 1) return;
+              // Advance every 3 seconds
+              card._carouselInterval = setInterval(() => {
+                currentIdx = (currentIdx + 1) % count;
+                track.style.transform = `translateX(-${currentIdx * 100}%)`;
+              }, 3000);
+            }
+
+            function stopCarousel() {
+              if (card._carouselInterval) {
+                clearInterval(card._carouselInterval);
+                card._carouselInterval = null;
+              }
+            }
+
+            // Pause on hover, resume on leave
+            card.addEventListener('mouseenter', stopCarousel);
+            card.addEventListener('mouseleave', () => {
+              // small timeout to avoid immediate restart on accidental leaves
+              setTimeout(startCarousel, 150);
+            });
+
+            // Start the carousel
+            startCarousel();
+          }
+
+          // Click opens the larger modal gallery
+          card.addEventListener('click', () => openProjectModal(project.id));
         });
       }
 
@@ -248,44 +298,118 @@ async function loadProjects() {
 
 // ===== PROJECT MODAL =====
 async function openProjectModal(projectId) {
-  const modal = document.getElementById('projectModal');
+  // Use the homepage gallery modal
+  const modal = document.getElementById('projects-gallery-modal');
   if (!modal) return;
-  
+
   try {
     const response = await fetch(projectsUrl);
     const data = await response.json();
     const projectsArray = Array.isArray(data) ? data : (Array.isArray(data.projects) ? data.projects : []);
     const project = projectsArray.find(p => p.id === projectId);
-    
-    if (project) {
-      const carousel = modal.querySelector('#projectCarousel');
-      if (carousel) {
-        carousel.innerHTML = '';
-        project.images?.forEach(img => {
-          const imgEl = document.createElement('img');
-          imgEl.src = img;
-          imgEl.alt = project.title;
-          carousel.appendChild(imgEl);
-        });
-      }
-      
-      const titleEl = modal.querySelector('h2');
-      if (titleEl) titleEl.textContent = project.title;
-      
-      const descEl = modal.querySelector('p');
-      if (descEl) descEl.textContent = project.description || 'Project details';
-      
-      modal.setAttribute('aria-hidden', 'false');
-      bindModalCarouselControls();
+
+    if (!project) return;
+
+    const track = document.getElementById('modalCarouselTrack');
+    const indicators = document.getElementById('modalIndicators');
+    const prevBtn = document.getElementById('modalPrev');
+    const nextBtn = document.getElementById('modalNext');
+    const closeBtn = modal.querySelector('.modal-close');
+
+    if (!track || !indicators) return;
+
+    // Populate images
+    track.innerHTML = '';
+    project.images?.forEach(src => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = project.title;
+      track.appendChild(img);
+    });
+
+    // Build indicators
+    indicators.innerHTML = '';
+    const imgs = Array.from(track.querySelectorAll('img'));
+    imgs.forEach((_, i) => {
+      const dot = document.createElement('span');
+      dot.className = `indicator ${i === 0 ? 'active' : ''}`;
+      dot.addEventListener('click', () => {
+        currentModalSlide = i;
+        track.style.transform = `translateX(-${currentModalSlide * 100}%)`;
+        indicators.querySelectorAll('.indicator').forEach((ind, idx) => ind.classList.toggle('active', idx === currentModalSlide));
+      });
+      indicators.appendChild(dot);
+    });
+
+    // Show modal
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+
+    // Slide state
+    let currentModalSlide = 0;
+
+    function updateButtons() {
+      indicators.querySelectorAll('.indicator').forEach((ind, idx) => ind.classList.toggle('active', idx === currentModalSlide));
+      track.style.transform = `translateX(-${currentModalSlide * 100}%)`;
     }
+
+    // Attach controls (replace handlers to avoid doubling)
+    if (prevBtn) {
+      prevBtn.onclick = () => {
+        currentModalSlide = (currentModalSlide - 1 + imgs.length) % imgs.length;
+        updateButtons();
+      };
+    }
+
+    if (nextBtn) {
+      nextBtn.onclick = () => {
+        currentModalSlide = (currentModalSlide + 1) % imgs.length;
+        updateButtons();
+      };
+    }
+
+    if (closeBtn) {
+      closeBtn.onclick = () => {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      };
+    }
+
+    // Close on backdrop
+    modal.onclick = (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+    };
+
+    // Keyboard navigation
+    const keyHandler = (e) => {
+      if (modal.style.display !== 'flex') return;
+      if (e.key === 'Escape') { modal.style.display = 'none'; document.body.style.overflow = 'auto'; }
+      if (e.key === 'ArrowLeft') { prevBtn?.click(); }
+      if (e.key === 'ArrowRight') { nextBtn?.click(); }
+    };
+    document.addEventListener('keydown', keyHandler);
+
+    // Clean up when modal closes (one simple cleanup attached to close)
+    const cleanup = () => {
+      document.removeEventListener('keydown', keyHandler);
+      if (prevBtn) prevBtn.onclick = null;
+      if (nextBtn) nextBtn.onclick = null;
+      if (closeBtn) closeBtn.onclick = null;
+      modal.onclick = null;
+    };
+
+    // Ensure cleanup when modal hidden via close button or backdrop
+    const originalClose = closeBtn?.onclick;
+    if (closeBtn) {
+      closeBtn.onclick = () => { originalClose && originalClose(); cleanup(); };
+    }
+
   } catch (e) {
     console.error('Error opening modal:', e);
   }
-}
-
-function closeProjectModal() {
-  const modal = document.getElementById('projectModal');
-  if (modal) modal.setAttribute('aria-hidden', 'true');
 }
 
 // ===== CAROUSEL CONTROLS =====

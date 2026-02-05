@@ -946,151 +946,27 @@
 </footer>
 
     <script>
-        // Projects Data
-        const projectsData = [
-            {
-                id: 1,
-                title: 'Skyline Business Center',
-                category: 'commercial',
-                description: 'A 15-story commercial complex with modern office spaces, retail areas, and underground parking.',
-                duration: '24 months',
-                budget: '$8.5M',
-                location: 'Downtown',
-                images: [
-                    'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-                    'https://images.unsplash.com/photo-1486718448742-163732cd3d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-                    'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-                    'https://images.unsplash.com/photo-1460317442991-0ec209397118?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80'
-                ]
-            },
-            {
-                id: 2,
-                title: 'Riverside Luxury Apartments',
-                category: 'residential',
-                description: 'Luxury residential complex with 50 units, swimming pool, gym, and waterfront views.',
-                duration: '18 months',
-                budget: '$12M',
-                location: 'Riverside',
-                images: [
-                    'https://images.unsplash.com/photo-1600585154340-043788447ebc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-                    'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-                    'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-                    'https://images.unsplash.com/photo-1512223557129-26bde4e574b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80'
-                ]
-            },
-            {
-                id: 3,
-                title: 'Historic Bank Building Restoration',
-                category: 'renovation',
-                description: 'Complete restoration and modernization of a 1920s bank building for contemporary office use.',
-                duration: '12 months',
-                budget: '$5.2M',
-                location: 'Heritage District',
-                images: [
-                    'https://images.unsplash.com/photo-1615873968403-89e068629265?ixlib=rb-4.0.3&auto=format&fit=crop&w=1332&q=80',
-                    'https://images.unsplash.com/photo-1554909811-aea14fcc0ce9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1332&q=80',
-                    'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&auto=format&fit=crop&w=1332&q=80',
-                    'https://images.unsplash.com/photo-1533090161392-a8255ba5eaea?ixlib=rb-4.0.3&auto=format&fit=crop&w=1332&q=80'
-                ]
-            },
-            {
-                id: 4,
-                title: 'Tech Park Development',
-                category: 'commercial',
-                description: 'State-of-the-art technology park with office complexes, data centers, and innovation hubs.',
-                duration: '30 months',
-                budget: '$18M',
-                location: 'Technology Hub',
-                images: [
-                    'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-                    'https://images.unsplash.com/photo-1486325212027-8081e485255e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-                    'https://images.unsplash.com/photo-1487365144351-b8472da7d491?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-                    'https://images.unsplash.com/photo-1486572788984-e10dcb2be48b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80'
-                ]
-            },
-            {
-                id: 5,
-                title: 'Central Highway Expansion',
-                category: 'infrastructure',
-                description: '50km highway expansion with modern infrastructure, bridges, and drainage systems.',
-                duration: '36 months',
-                budget: '$25M',
-                location: 'Regional Highway',
-                images: [
-                    'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-                    'https://images.unsplash.com/photo-1581092163562-40460ef61c04?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-                    'https://images.unsplash.com/photo-1581092162384-8987c1d64718?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-                    'https://images.unsplash.com/photo-1581091918015-e4ae37a08b25?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80'
-                ]
-            },
-            {
-                id: 6,
-                title: 'Green Valley Estates',
-                category: 'residential',
-                description: '200-unit eco-friendly residential community with sustainable building practices.',
-                duration: '28 months',
-                budget: '$15M',
-                location: 'Green Valley',
-                images: [
-                    'https://images.unsplash.com/photo-1574183365688-49f73c299263?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-                    'https://images.unsplash.com/photo-1570129477492-45ac003d2e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-                    'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-                    'https://images.unsplash.com/photo-1570129477492-45ac003d2e0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80'
-                ]
-            },
-            {
-                id: 7,
-                title: 'Shopping Mall Renovation',
-                category: 'renovation',
-                description: 'Complete modernization and expansion of existing shopping mall with updated facilities.',
-                duration: '15 months',
-                budget: '$7.8M',
-                location: 'Shopping District',
-                images: [
-                    'https://images.unsplash.com/photo-1567521464027-f127ff144326?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-                    'https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-                    'https://images.unsplash.com/photo-1565521409186-a36f5e417d72?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-                    'https://images.unsplash.com/photo-1586265034519-c21dbc4d8e1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80'
-                ]
-            },
-            {
-                id: 8,
-                title: 'Medical Center Complex',
-                category: 'commercial',
-                description: 'Modern medical facility with multiple departments, research labs, and patient care units.',
-                duration: '22 months',
-                budget: '$13.5M',
-                location: 'Medical District',
-                images: [
-                    'https://images.unsplash.com/photo-1587854692152-cbe660dbde0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-                    'https://images.unsplash.com/photo-1576091160550-112173faf246?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-                    'https://images.unsplash.com/photo-1576091160692-112c51435537?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-                    'https://images.unsplash.com/photo-1576091160949-112c51435537?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80'
-                ]
-            },
-            {
-                id: 9,
-                title: 'Water Treatment Plant',
-                category: 'infrastructure',
-                description: 'State-of-the-art water treatment facility with advanced purification systems.',
-                duration: '20 months',
-                budget: '$11.2M',
-                location: 'Industrial Zone',
-                images: [
-                    'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-                    'https://images.unsplash.com/photo-1581092162384-8987c1d64718?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-                    'https://images.unsplash.com/photo-1581091918015-e4ae37a08b25?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
-                    'https://images.unsplash.com/photo-1581092923537-a7c44ca34a77?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80'
-                ]
+        // Load projects from data/projects.json (CMS-managed)
+        let projectsData = [];
+
+        async function loadProjectsDataFile() {
+            try {
+                const res = await fetch('data/projects.json');
+                const json = await res.json();
+                projectsData = Array.isArray(json) ? json : (Array.isArray(json.projects) ? json.projects : []);
+            } catch (e) {
+                console.error('Failed to load data/projects.json, falling back to empty array', e);
+                projectsData = [];
             }
-        ];
+        }
 
         let currentFilter = 'all';
         let currentModalProjectId = 0;
         let currentModalSlide = 0;
 
-        // Initialize Projects
-        function initProjects() {
+        // Initialize Projects (load JSON then render)
+        async function initProjects() {
+            await loadProjectsDataFile();
             renderProjects(projectsData);
         }
 
@@ -1121,29 +997,30 @@
                 const projectCard = document.createElement('div');
                 projectCard.className = 'project-card';
                 projectCard.style.animationDelay = (index * 0.1) + 's';
-                
+
+                const imgs = Array.isArray(project.images) ? project.images : [];
+                const imagesHtml = imgs.map(img => `<img src="${img}" alt="${project.title}">`).join('');
+                const indicatorsHtml = imgs.map((_, i) => `<span class="indicator ${i === 0 ? 'active' : ''}" onclick="changeCarouselSlide(this, '${project.id}')"></span>`).join('');
+                const categoryLabel = project.category ? (String(project.category).toUpperCase()) : '';
+
                 projectCard.innerHTML = `
                     <div class="project-carousel-container">
                         <div class="project-carousel-track" data-project="${project.id}">
-                            ${project.images.map(img => `
-                                <img src="${img}" alt="${project.title}">
-                            `).join('')}
+                            ${imagesHtml}
                         </div>
                         <div class="carousel-indicators">
-                            ${project.images.map((_, i) => `
-                                <span class="indicator ${i === 0 ? 'active' : ''}" onclick="changeCarouselSlide(this, ${project.id})"></span>
-                            `).join('')}
+                            ${indicatorsHtml}
                         </div>
                     </div>
                     <div class="project-info">
-                        <span class="project-category">${project.category.toUpperCase()}</span>
-                        <h3>${project.title}</h3>
-                        <p>${project.description}</p>
+                        <span class="project-category">${categoryLabel}</span>
+                        <h3>${project.title || ''}</h3>
+                        <p>${project.description || ''}</p>
                         <div class="project-meta">
-                            <span><i class="fas fa-calendar"></i> ${project.duration}</span>
-                            <span><i class="fas fa-map-marker-alt"></i> ${project.location}</span>
+                            <span><i class="fas fa-calendar"></i> ${project.duration || ''}</span>
+                            <span><i class="fas fa-map-marker-alt"></i> ${project.location || ''}</span>
                         </div>
-                        <button class="btn" onclick="openProjectModal(${project.id})">View Gallery</button>
+                        <button class="btn" onclick="openProjectModal('${project.id}')">View Gallery</button>
                     </div>
                 `;
 

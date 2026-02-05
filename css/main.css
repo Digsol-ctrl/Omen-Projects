@@ -1016,6 +1016,52 @@ header.hidden {
   }
 }
 
+/* Featured carousel on homepage */
+.featured-carousel {
+  display: flex;
+  gap: 12px;
+  overflow: hidden;
+  width: 100%;
+  align-items: center;
+}
+.featured-carousel img {
+  width: 100%;
+  max-height: 360px;
+  object-fit: cover;
+  flex: 0 0 auto;
+  border-radius: 8px;
+}
+
+/* Small per-card carousel used on homepage cards */
+.card-carousel {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+}
+.card-carousel .card-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.5s ease;
+}
+.card-carousel .card-track img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  flex: 0 0 100%;
+}
+
+/* Modal gallery track safety */
+#modalCarouselTrack, .modal-carousel-track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+#modalCarouselTrack img, .modal-carousel-track img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 /* Footer */
 footer {
   background-color: var(--dark-blue);

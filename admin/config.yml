@@ -77,33 +77,7 @@ collections:
       - {label: "Email", name: "email", widget: "string", required: false}
       - {label: "Phone", name: "phone", widget: "string", required: false}
 
-  # Settings file for site-wide content
-  - label: "Site Settings"
-    name: "settings"
-    files:
-      - label: "Company Info"
-        name: "company"
-        file: "data/company.json"
-        fields:
-          - {label: "Company Name", name: "name", widget: "string"}
-          - {label: "Tagline", name: "tagline", widget: "string"}
-          - {label: "Description", name: "description", widget: "text"}
-          - {label: "Phone", name: "phone", widget: "string"}
-          - {label: "Email", name: "email", widget: "string"}
-          - {label: "Address", name: "address", widget: "string"}
-          - {label: "Logo URL", name: "logo", widget: "image"}
-          - {label: "Business Hours", name: "hours", widget: "text"}
-
-      - label: "Homepage Hero"
-        name: "hero"
-        file: "data/hero.json"
-        fields:
-          - {label: "Hero Title", name: "title", widget: "string"}
-          - {label: "Hero Subtitle", name: "subtitle", widget: "string"}
-          - {label: "Hero Image", name: "image", widget: "image"}
-          - {label: "CTA Button Text", name: "cta_text", widget: "string"}
-          - {label: "CTA Button URL", name: "cta_url", widget: "string"}
-
+  
   # File-based collection for site projects (editable JSON)
   - label: "Projects Data"
     name: "projects-data"
