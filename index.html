@@ -35,6 +35,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="icon" href="/images/logo.svg" type="image/svg+xml">
 
     <style>
         :root {
@@ -2268,7 +2269,7 @@
 
             <div class="video-container scale-in" style="margin-top: 24px;">
                 <video class="autoplay-video" controls playsinline preload="metadata" data-has-sound="true" controlsList="nodownload">
-                    <source src="videos/On a _ChooseDay _ Choose Omen Projects__followers - 2102886667148695(HD).mp4" type="video/mp4">
+                    <source src="videos/Omenprojects-video.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <button class="unmute-btn" aria-label="Toggle sound">🔊</button>
@@ -2725,36 +2726,74 @@
                 }, 500);
             }
         });
+        // Modal state
+        let currentModalSlide = 0;
+        let currentProjectId = 0;
+
         function nextSlide() {
-            const project = projectsData[currentProjectId];
-            currentModalSlide = (currentModalSlide + 1) % project.images.length;
+            const images = modalCarouselTrack ? modalCarouselTrack.querySelectorAll('img') : [];
+            if (!images.length) return;
+            currentModalSlide = (currentModalSlide + 1) % images.length;
             goToSlide(currentModalSlide);
         }
 
         function prevSlide() {
-            const project = projectsData[currentProjectId];
-            currentModalSlide = (currentModalSlide - 1 + project.images.length) % project.images.length;
+            const images = modalCarouselTrack ? modalCarouselTrack.querySelectorAll('img') : [];
+            if (!images.length) return;
+            currentModalSlide = (currentModalSlide - 1 + images.length) % images.length;
             goToSlide(currentModalSlide);
         }
 
-        // Modal controls
-        if (modalClose && modalPrevBtn && modalNextBtn) {
+        function goToSlide(slideIndex) {
+            currentModalSlide = slideIndex;
+            if (!modalCarouselTrack) return;
+            modalCarouselTrack.style.transform = `translateX(-${currentModalSlide * 100}%)`;
+            if (modalIndicators) {
+                modalIndicators.querySelectorAll('.indicator').forEach((ind, idx) => {
+                    ind.classList.toggle('active', idx === currentModalSlide);
+                });
+            }
+        }
 
+        function closeModal() {
+            if (!modal) return;
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            if (modalCarouselTrack) {
+                modalCarouselTrack.innerHTML = '';
+                modalCarouselTrack.style.transform = '';
+            }
+            if (modalIndicators) modalIndicators.innerHTML = '';
+            currentModalSlide = 0;
+            currentProjectId = 0;
+        }
+
+        // Modal controls: query elements safely and attach listeners only if present
+        const modal = document.getElementById('projects-gallery-modal');
+        const modalClose = document.querySelector('.modal-close');
+        const modalPrevBtn = document.getElementById('modalPrev');
+        const modalNextBtn = document.getElementById('modalNext');
+        const modalCarouselTrack = document.getElementById('modalCarouselTrack');
+        const modalIndicators = document.getElementById('modalIndicators');
+
+        if (modal && modalClose && modalPrevBtn && modalNextBtn) {
             modalClose.addEventListener('click', closeModal);
             modalPrevBtn.addEventListener('click', prevSlide);
             modalNextBtn.addEventListener('click', nextSlide);
         }
 
-        // Close modal on outside click
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModal();
-            }
-        });
+        // Close modal on outside click (guarded)
+        if (modal) {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+        }
 
-        // Keyboard navigation
+        // Keyboard navigation (guarded)
         document.addEventListener('keydown', (e) => {
-            if (modal.style.display === 'flex') {
+            if (modal && modal.style && modal.style.display === 'flex') {
                 if (e.key === 'Escape') closeModal();
                 if (e.key === 'ArrowLeft') prevSlide();
                 if (e.key === 'ArrowRight') nextSlide();
