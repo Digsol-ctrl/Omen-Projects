@@ -6,8 +6,7 @@ const matter = require('gray-matter');
 async function main() {
   const repoRoot = path.resolve(__dirname, '..');
   const contentDir = path.join(repoRoot, 'content', 'gallery');
-  const outDir = path.join(repoRoot, 'public', 'data');
-  const outFile = path.join(outDir, 'projects.json');
+  const outFile = path.join(repoRoot, 'data', 'projects.json');
 
   // Read content directory
   let entries = [];
@@ -34,7 +33,8 @@ async function main() {
     }
   }
 
-  // Ensure output dir exists
+  // Ensure output file can be created (create parent dir if needed)
+  const outDir = path.dirname(outFile);
   await fs.mkdir(outDir, { recursive: true });
 
   // Write JSON (array of project objects), preserve all fields
