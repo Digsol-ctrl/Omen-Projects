@@ -2738,9 +2738,12 @@
         }
 
         // Modal controls
-        modalClose.addEventListener('click', closeModal);
-        modalPrevBtn.addEventListener('click', prevSlide);
-        modalNextBtn.addEventListener('click', nextSlide);
+        if (modalClose && modalPrevBtn && modalNextBtn) {
+
+            modalClose.addEventListener('click', closeModal);
+            modalPrevBtn.addEventListener('click', prevSlide);
+            modalNextBtn.addEventListener('click', nextSlide);
+        }
 
         // Close modal on outside click
         modal.addEventListener('click', (e) => {
