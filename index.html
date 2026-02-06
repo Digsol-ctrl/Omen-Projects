@@ -33,8 +33,9 @@
         })();
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <link rel="icon" href="/images/logo.svg" type="image/svg+xml">
 
     <style>
@@ -217,32 +218,27 @@
         /* Animation Classes */
         .fade-in {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transition: opacity 0.6s ease;
         }
         
         .fade-in.visible {
             opacity: 1;
-            transform: translateY(0);
         }
         
         .slide-in-left {
             opacity: 0;
-            transform: translateX(-50px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transition: opacity 0.6s ease;
             flex: 1;
         }
         
         .slide-in-left.visible {
             opacity: 1;
-            transform: translateX(0);
             flex: 1;
         }
         
         .slide-in-right {
             opacity: 0;
-            transform: translateX(50px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transition: opacity 0.6s ease;
             flex: 1;
         }
 
@@ -288,19 +284,16 @@
         
         .slide-in-right.visible {
             opacity: 1;
-            transform: translateX(0);
             flex: 1;
         }
         
         .scale-in {
             opacity: 0;
-            transform: scale(0.8);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transition: opacity 0.6s ease;
         }
         
         .scale-in.visible {
             opacity: 1;
-            transform: scale(1);
         }
         
         .float-animation {
@@ -509,7 +502,7 @@
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background: linear-gradient(135deg, rgba(0, 31, 77, 0.9) 0%, rgba(30, 144, 255, 0.8) 100%);
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -2147,8 +2140,8 @@
             <div class="team-grid">
                 <!-- Managing Director -->
                 <div class="team-card ceo-card scale-in" onclick="openTeamModal('timson')">
-                    <div class="team-img" style="cursor: pointer;">
-                        <img src="https://via.placeholder.com/300x350/1e90ff/ffffff?text=Timson+Chikandiwa" alt="Timson Takudzwa Chikandiwa">
+                    <div class="team-img" style="cursor: pointer; background: linear-gradient(135deg, #1e90ff 0%, #0a4a8a 100%); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: white;">
+                        <i class="fas fa-user-tie"></i>
                     </div>
                     <div class="team-info">
                         <h3>Timson Takudzwa Chikandiwa</h3>
@@ -2160,8 +2153,8 @@
                 
                 <!-- Company Secretary -->
                 <div class="team-card scale-in" onclick="openTeamModal('rudo')">
-                    <div class="team-img" style="cursor: pointer;">
-                        <img src="https://via.placeholder.com/300x350/1e90ff/ffffff?text=Rudo+Chikandiwa" alt="Rudo Chikandiwa">
+                    <div class="team-img" style="cursor: pointer; background: linear-gradient(135deg, #1e90ff 0%, #0a4a8a 100%); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: white;">
+                        <i class="fas fa-user"></i>
                     </div>
                     <div class="team-info">
                         <h3>Rudo Chikandiwa</h3>
@@ -2173,8 +2166,8 @@
                 
                 <!-- Construction Manager -->
                 <div class="team-card scale-in" onclick="openTeamModal('erick')">
-                    <div class="team-img" style="cursor: pointer;">
-                        <img src="https://via.placeholder.com/300x350/1e90ff/ffffff?text=Erick+Muroiwa" alt="Erick Muroiwa">
+                    <div class="team-img" style="cursor: pointer; background: linear-gradient(135deg, #1e90ff 0%, #0a4a8a 100%); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: white;">
+                        <i class="fas fa-hard-hat"></i>
                     </div>
                     <div class="team-info">
                         <h3>Erick Muroiwa</h3>
@@ -2186,8 +2179,8 @@
 
                 <!-- Civil & Structural Engineer 1 -->
                 <div class="team-card scale-in" onclick="openTeamModal('tendai')">
-                    <div class="team-img" style="cursor: pointer;">
-                        <img src="https://via.placeholder.com/300x350/1e90ff/ffffff?text=Tendai+Hoko" alt="Tendai Hoko">
+                    <div class="team-img" style="cursor: pointer; background: linear-gradient(135deg, #1e90ff 0%, #0a4a8a 100%); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: white;">
+                        <i class="fas fa-ruler-combined"></i>
                     </div>
                     <div class="team-info">
                         <h3>Tendai Hoko</h3>
@@ -2199,8 +2192,8 @@
 
                 <!-- Civil & Structural Engineer 2 -->
                 <div class="team-card scale-in" onclick="openTeamModal('marshal')">
-                    <div class="team-img" style="cursor: pointer;">
-                        <img src="https://via.placeholder.com/300x350/1e90ff/ffffff?text=Marshal+Chigubu" alt="Marshal Chigubu">
+                    <div class="team-img" style="cursor: pointer; background: linear-gradient(135deg, #1e90ff 0%, #0a4a8a 100%); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: white;">
+                        <i class="fas fa-building"></i>
                     </div>
                     <div class="team-info">
                         <h3>Marshal Chigubu</h3>
@@ -2212,8 +2205,8 @@
 
                 <!-- Company Accountant -->
                 <div class="team-card scale-in" onclick="openTeamModal('tabitha')">
-                    <div class="team-img" style="cursor: pointer;">
-                        <img src="https://via.placeholder.com/300x350/1e90ff/ffffff?text=Tabitha+Chikandiwa" alt="Tabitha Chikandiwa">
+                    <div class="team-img" style="cursor: pointer; background: linear-gradient(135deg, #1e90ff 0%, #0a4a8a 100%); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: white;">
+                        <i class="fas fa-calculator"></i>
                     </div>
                     <div class="team-info">
                         <h3>Tabitha Chikandiwa</h3>
@@ -2643,7 +2636,7 @@
         
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="js/main.js" defer></script>
 
     <script>(function(){
         // Mobile Navigation Toggle
