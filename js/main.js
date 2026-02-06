@@ -263,6 +263,8 @@ async function loadProjects() {
               const imgEl = document.createElement('img');
               imgEl.src = src || 'images/hero.svg';
               imgEl.alt = project.title;
+              imgEl.loading = 'lazy';
+              imgEl.decoding = 'async';
               imgEl.style.width = '100%';
               imgEl.style.flex = '0 0 100%';
               track.appendChild(imgEl);
@@ -340,6 +342,8 @@ async function openProjectModal(projectId) {
       const img = document.createElement('img');
       img.src = src;
       img.alt = project.title;
+      img.loading = 'lazy';
+      img.decoding = 'async';
       track.appendChild(img);
     });
 
