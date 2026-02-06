@@ -1,6 +1,6 @@
 ---
-title: Zimre Park
-slug: "home construction in Zimre "
+title: Bulawayo Burnside Project
+slug: Data Center
 category: Residential
 location: ZImre Harare
 featured_image: /images/uploads/whatsapp-image-2026-02-05-at-20.42.23-1-.jpeg
@@ -10,4 +10,4 @@ gallery_images:
   - image: /images/uploads/whatsapp-image-2026-02-05-at-20.42.23-1-.jpeg
 status: Completed
 ---
-this is a building construction that was done here in zimew and we know a lot about it
+NetOne Data Centre, Ascot Bulawayo
