@@ -5,19 +5,20 @@
     "slug": "skyline-business-center",
     "category": "Commercial",
     "location": "Downtown District",
-    "featured_image": "/images/uploads/pexels-gustavo-fring-5622665.jpg",
+    "featured_image": "/images/uploads/skyline-featured.jpg",
     "completion_date": "2024-06-15",
     "status": "Completed",
     "gallery_images": [
-      { "image": "/images/uploads/pexels-gustavo-fring-5622665.jpg", "caption": "Exterior view" },
-      { "image": "/images/uploads/gray-minimalist-happy-monday-facebook-post-1-.png", "caption": "Main entrance" },
-      { "image": "/images/uploads/chatgpt-image-jan-30-2026-08_35_37-pm.png", "caption": "Interior design" }
+      { "image": "/images/uploads/skyline-1.jpg", "caption": "Exterior view - Phase 1" },
+      { "image": "/images/uploads/skyline-2.jpg", "caption": "Main atrium" },
+      { "image": "/images/uploads/skyline-3.jpg", "caption": "Parking structure" },
+      { "image": "/images/uploads/skyline-4.jpg", "caption": "Final completion" }
     ]
   },
   {
     "id": "5-story-building-construction",
     "title": "5 Story Building Construction",
-    "slug": "building-construction",
+    "slug": "building Construction...........",
     "category": "Residential",
     "location": "Rusape",
     "featured_image": "/images/uploads/gray-minimalist-happy-monday-facebook-post-1-.png",
@@ -30,21 +31,18 @@
   },
   {
     "id": "5-story-building-construction-1",
-    "title": "5 Story Building Renovation",
-    "slug": "building-renovation",
+    "title": "5 Story Building Construction",
+    "slug": "j",
     "category": "Renovation",
-    "location": "Harare",
+    "location": "nibibi",
     "featured_image": "/images/uploads/gray-minimalist-happy-monday-facebook-post-1-.jpg",
     "completion_date": "2026-02-05",
     "status": "Completed",
-    "gallery_images": [
-      { "image": "/images/uploads/gray-minimalist-happy-monday-facebook-post-1-.jpg" },
-      { "image": "/images/uploads/pexels-gustavo-fring-5622665.jpg" }
-    ]
+    "gallery_images": []
   },
   {
     "id": "my-first-home",
-    "title": "My First Home",
+    "title": "my First Home",
     "slug": "first-home",
     "category": "Residential",
     "location": "Mutare",

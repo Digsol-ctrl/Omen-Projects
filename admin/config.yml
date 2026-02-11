@@ -11,14 +11,14 @@ backend:
 
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
-site_url: "https://omenp.netlify.app"
+site_url: "https://omenprojects.co.zw"
 logo_url: "/logo.jpg"
 
 # Collections for managing content with images
 collections:
   # Gallery/Projects collection (stored as Markdown with frontmatter)
   - name: "gallery"
-    label: "Project Gallery"
+    label: "Projects Gallery"
     folder: "content/gallery"
     create: true
     slug: "{{slug}}"
@@ -48,31 +48,31 @@ collections:
       - {label: "Status", name: "status", widget: "select", options: ["In Progress", "Completed", "Upcoming"], default: "Completed"}
 
   # Services configuration (editable list)
-  - name: "services"
-    label: "Services"
-    folder: "content/services"
-    create: true
-    slug: "{{slug}}"
-    extension: "md"
-    format: "frontmatter"
-    fields:
-      - {label: "Service Name", name: "title", widget: "string", required: true}
-      - {label: "Icon Class", name: "icon", widget: "string", required: false, hint: "Font Awesome class, e.g., fa-building"}
-      - {label: "Description", name: "body", widget: "markdown", required: true}
-      - {label: "Service Image", name: "image", widget: "image", required: false}
+  #- name: "services"
+  # label: "Services"
+  #  folder: "content/services"
+  # create: true
+  # slug: "{{slug}}"
+  # extension: "md"
+  #  format: "frontmatter"
+  #  fields:
+  #    - {label: "Service Name", name: "title", widget: "string", required: true}
+  #    - {label: "Icon Class", name: "icon", widget: "string", required: false, hint: "Font Awesome class, e.g., fa-building"}
+  #    - {label: "Description", name: "body", widget: "markdown", required: true}
+  #   - {label: "Service Image", name: "image", widget: "image", required: false}
 
   # Team Members collection
-  - name: "team"
-    label: "Team Members"
-    folder: "content/team"
-    create: true
-    slug: "{{slug}}"
-    extension: "md"
-    format: "frontmatter"
-    fields:
-      - {label: "Name", name: "title", widget: "string", required: true}
-      - {label: "Position", name: "position", widget: "string", required: true}
-      - {label: "Bio", name: "body", widget: "markdown", required: false}
-      - {label: "Photo", name: "photo", widget: "image", required: true}
-      - {label: "Email", name: "email", widget: "string", required: false}
-      - {label: "Phone", name: "phone", widget: "string", required: false}
+  #- name: "team"
+  #  label: "Team Members"
+  #  folder: "content/team"
+  # create: true
+  # slug: "{{slug}}"
+  #  extension: "md"
+  #  format: "frontmatter"
+  #  fields:
+  #    - {label: "Name", name: "title", widget: "string", required: true}
+  #    - {label: "Position", name: "position", widget: "string", required: true}
+  #    - {label: "Bio", name: "body", widget: "markdown", required: false}
+  #    - {label: "Photo", name: "photo", widget: "image", required: true}
+  #    - {label: "Email", name: "email", widget: "string", required: false}
+  #    - {label: "Phone", name: "phone", widget: "string", required: false}

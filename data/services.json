@@ -1,22 +1,67 @@
 [
   {
-    "id": "residential",
-    "title": "Residential Building Construction",
-    "description": "Design and construction of homes, duplexes and small apartment blocks."
+    "id": "building-construction",
+    "title": "Building Construction",
+    "icon": "fas fa-building",
+    "description": "From residential to commercial buildings, we handle all phases of construction with precision and adherence to the highest quality standards.",
+    "features": [
+      "Residential construction",
+      "Commercial construction",
+      "Multi-story buildings",
+      "Quality materials",
+      "Expert craftsmanship"
+    ]
   },
   {
-    "id": "architectural",
-    "title": "Architectural Design",
-    "description": "Architectural design services: planning, drawings and visualisation."
-  },
-  {
-    "id": "management",
+    "id": "project-management",
     "title": "Project Management",
-    "description": "Full project management: procurement, scheduling and supervision."
+    "icon": "fas fa-tasks",
+    "description": "Our expert project managers ensure timely delivery, budget control, and seamless coordination between all stakeholders.",
+    "features": [
+      "Timeline management",
+      "Budget control",
+      "Stakeholder coordination",
+      "Progress tracking",
+      "Risk management"
+    ]
   },
   {
-    "id": "boq",
-    "title": "Bills of Quantities",
-    "description": "Accurate BOQs for cost estimation and procurement."
+    "id": "renovation",
+    "title": "Renovation",
+    "icon": "fas fa-home",
+    "description": "Transform your existing space with our renovation services that combine modern design with functional improvements.",
+    "features": [
+      "Space modernization",
+      "Design consultation",
+      "Structural improvements",
+      "Interior upgrades",
+      "Sustainable solutions"
+    ]
+  },
+  {
+    "id": "architectural-services",
+    "title": "Architectural Services and Bills of Quantities",
+    "icon": "fas fa-drafting-compass",
+    "description": "Our architects create innovative, sustainable designs that meet client needs while complying with all regulations.",
+    "features": [
+      "Custom design",
+      "3D visualization",
+      "BOQ preparation",
+      "Code compliance",
+      "Sustainable design"
+    ]
+  },
+  {
+    "id": "quality-assurance",
+    "title": "Quality Assurance",
+    "icon": "fas fa-clipboard-check",
+    "description": "Comprehensive quality control systems to ensure all materials and workmanship meet our strict standards.",
+    "features": [
+      "Material inspection",
+      "Workmanship quality",
+      "Compliance verification",
+      "Safety audits",
+      "Final inspection"
+    ]
   }
 ]
