@@ -5,11 +5,12 @@ category: Residential
 location: Hopleyn Estate, Bulawayo
 featured_image: /images/uploads/whatsapp-image-2026-02-07-at-21.40.48-2-.jpeg
 gallery_images:
-  - image: /images/uploads/whatsapp-image-2026-02-07-at-21.40.48.jpeg
+  - image: /images/uploads/whatsapp-image-2026-02-11-at-20.27.14-1-.jpeg
   - image: /images/uploads/whatsapp-image-2026-02-07-at-21.40.49-1-.jpeg
-  - image: /images/uploads/whatsapp-image-2026-02-07-at-21.40.48-1-.jpeg
+  - image: /images/uploads/whatsapp-image-2026-02-11-at-20.27.16.jpeg
   - image: /images/uploads/whatsapp-image-2026-02-07-at-21.40.48-2-.jpeg
   - image: /images/uploads/whatsapp-image-2026-02-07-at-21.40.49.jpeg
+  - image: /images/uploads/whatsapp-image-2026-02-11-at-20.27.16-1-.jpeg
 completion_date: ""
 status: Completed
 ---
