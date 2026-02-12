@@ -60,6 +60,9 @@
         .nav-menu a{text-decoration:none;color:var(--dark-gray);font-weight:600;font-size:1rem;transition:var(--transition)}
         .nav-menu a:hover{color:var(--primary-blue)}
         .mobile-toggle{display:none;font-size:1.5rem;cursor:pointer;color:var(--dark-blue)}
+        @media (max-width: 768px) {
+            .mobile-toggle { display: block; }
+        }
         .top-contact-bar{background-color:var(--dark-blue);color:#fff;padding:8px 0;font-size:.9rem}
         .contact-info-top{display:flex;justify-content:space-between;align-items:center}
         .contact-info-top a{color:#fff;text-decoration:none;margin-right:20px;transition:var(--transition);display:inline-block}
