@@ -1052,14 +1052,30 @@ header.hidden {
 }
 
 /* Modal gallery track safety */
+/* Modal gallery track safety - scoped to homepage modal for higher specificity */
 #modalCarouselTrack, .modal-carousel-track {
   display: flex;
   transition: transform 0.5s ease;
 }
-#modalCarouselTrack img, .modal-carousel-track img {
+
+/* Stronger, ID-scoped rules so the homepage modal always lays out slides correctly */
+#projects-gallery-modal .modal-carousel-track,
+#modalCarouselTrack,
+.modal-carousel-track {
+  display: flex;
+  transition: transform 0.5s ease;
+  height: 500px; /* explicit height for consistent layout */
+}
+
+#projects-gallery-modal .modal-carousel-track img,
+#modalCarouselTrack img,
+.modal-carousel-track img {
+  flex: 0 0 100%;
+  min-width: 100%;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  display: block;
 }
 
 /* Footer */

@@ -4,6 +4,19 @@
 const servicesUrl = window.SERVICES_JSON || 'data/services.json';
 const projectsUrl = window.PROJECTS_JSON || 'data/projects.json';
 
+// Utility: Normalize images for a project object
+function normalizeImages(project) {
+  if (!project) return [];
+  if (Array.isArray(project.images)) {
+    return project.images.filter(Boolean);
+  }
+  if (typeof project.image === 'string') {
+    return [project.image];
+  }
+  // Fallback: no images
+  return [];
+}
+
 // ===== SCROLL & ANIMATION =====
 const scrollObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -57,179 +70,16 @@ const navMenu = document.querySelector('.nav-menu');
 
 if (mobileToggle) {
   mobileToggle.addEventListener('click', () => {
-    navMenu?.classList.toggle('active');
-    // Swap icon
-    const icon = mobileToggle.querySelector('i');
-    if (icon) {
-      if (icon.classList.contains('fa-bars')) {
-        icon.classList.remove('fa-bars');
-        icon.classList.add('fa-times');
-      } else {
-        icon.classList.add('fa-bars');
-        icon.classList.remove('fa-times');
+          navMenu?.classList.toggle('active');
+        });
       }
-    }
-  });
+    
+    
 
-  // Close menu on nav link click
-  navMenu?.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      navMenu.classList.remove('active');
-      const icon = mobileToggle.querySelector('i');
-      if (icon) {
-        icon.classList.add('fa-bars');
-        icon.classList.remove('fa-times');
-      }
-    });
-  });
-}
-
-// ===== COUNTER ANIMATION =====
-function animateCounter(element, finalValue, duration = 1500) {
-  let currentValue = 0;
-  const increment = finalValue / (duration / 16);
-  
-  const timer = setInterval(() => {
-    currentValue += increment;
-    if (currentValue >= finalValue) {
-      element.textContent = finalValue + '+';
-      clearInterval(timer);
-    } else {
-      element.textContent = Math.floor(currentValue);
-    }
-  }, 16);
-}
-
-// Observe counters
-const counterObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting && !entry.target.dataset.animated) {
-      entry.target.dataset.animated = 'true';
-      const finalValue = parseInt(entry.target.textContent) || 0;
-      animateCounter(entry.target, finalValue);
-    }
-  });
-}, { threshold: 0.5 });
-
-document.querySelectorAll('.counter').forEach(el => {
-  counterObserver.observe(el);
-});
-
-// ===== FORM RIPPLE EFFECT =====
-document.querySelectorAll('.form-control').forEach(input => {
-  input.addEventListener('focus', (e) => {
-    createRipple(e.target);
-  });
-});
-
-function createRipple(element) {
-  const ripple = document.createElement('span');
-  ripple.classList.add('ripple');
-  ripple.style.position = 'absolute';
-  ripple.style.borderRadius = '50%';
-  ripple.style.background = 'rgba(30, 144, 255, 0.6)';
-  ripple.style.transform = 'scale(0)';
-  ripple.style.animation = 'ripple-effect 0.6s ease-out';
-  element.style.position = 'relative';
-  element.appendChild(ripple);
-  
-  setTimeout(() => ripple.remove(), 600);
-}
-
-// ===== WHATSAPP FLOAT RIPPLE =====
-const whatsappFloat = document.querySelector('.whatsapp-float');
-if (whatsappFloat) {
-  whatsappFloat.addEventListener('mouseenter', () => {
-    const ripple = document.createElement('span');
-    ripple.classList.add('whatsapp-ripple');
-    ripple.style.width = '12px';
-    ripple.style.height = '12px';
-    ripple.style.left = '50%';
-    ripple.style.top = '50%';
-    ripple.style.transform = 'translate(-50%, -50%)';
-    whatsappFloat.appendChild(ripple);
-    setTimeout(() => ripple.remove(), 600);
-  });
-}
 
 // ===== LOAD SERVICES =====
-async function loadServices() {
-  try {
-    const response = await fetch(servicesUrl);
-    const data = await response.json();
-    const container = document.getElementById('servicesList');
-    
-    if (data.services && Array.isArray(data.services)) {
-      data.services.forEach((service, idx) => {
-        const card = document.createElement('div');
-        card.className = 'service-card fade-in';
-        card.style.animationDelay = `${idx * 0.1}s`;
-        card.innerHTML = `
-          <i class="fa-solid fa-${getServiceIcon(service.title)} service-icon"></i>
-          <h3>${service.title}</h3>
-          <p>${service.description}</p>
-        `;
-        container?.appendChild(card);
-      });
-      observeElements();
-    }
-  } catch (e) {
-    console.error('Error loading services:', e);
-  }
-}
-
-function getServiceIcon(title) {
-  const icons = {
-    'residential': 'building',
-    'architectural': 'pencil-ruler',
-    'management': 'chart-line',
-    'bills': 'receipt',
-    'construction': 'hard-hat',
-    'design': 'drafting-compass'
-  };
-  
-  for (const [key, icon] of Object.entries(icons)) {
-    if (title.toLowerCase().includes(key)) return icon;
-  }
-  return 'building';
-}
-
-// ===== IMAGE NORMALIZATION =====
-// Handle both old schema (images array) and new schema (gallery_images + featured_image)
-function normalizeImages(project) {
-  if (Array.isArray(project.images) && project.images.length) {
-    return project.images;
-  }
-  if (Array.isArray(project.gallery_images) && project.gallery_images.length) {
-    return project.gallery_images.map(g => (typeof g === 'string' ? g : g.image)).filter(Boolean);
-  }
-  if (project.featured_image) {
-    return [project.featured_image];
-  }
-  return ['images/hero.svg'];
-}
-
-// ===== LOAD PROJECTS =====
-async function loadProjects() {
-  try {
-    const response = await fetch(projectsUrl);
-    const data = await response.json();
-    const projectsArray = Array.isArray(data) ? data : (Array.isArray(data.projects) ? data.projects : []);
-    
-    if (projectsArray && projectsArray.length) {
-      const projectsList = document.getElementById('projectsList');
-      const carousel = document.getElementById('projectCarousel');
-
-      // Clear any existing featured carousel content — we use per-card carousels instead
-      if (carousel) {
-        carousel.innerHTML = '';
-        // hide the featured carousel container so no stray images appear
-        carousel.style.display = 'none';
-      }
-
-      // Grid
-      if (projectsList) {
-        projectsArray.forEach((project, idx) => {
+async function loadServices(projectsArray) {
+  projectsArray.forEach((project, idx) => {
           const card = document.createElement('div');
           card.className = 'project-card scale-in';
           card.style.animationDelay = `${idx * 0.15}s`;
@@ -301,17 +151,67 @@ async function loadProjects() {
             startCarousel();
           }
 
-          // Click opens the larger modal gallery
-          card.addEventListener('click', () => openProjectModal(project.id));
-        });
-      }
+          // Click handled by event delegation below
+      	});
 
-      observeElements();
+  observeElements();
+  // Hide page loader after all project images are loaded
+  const pageLoader = document.getElementById('pageLoader');
+  if (pageLoader) {
+    const projectsList = document.getElementById('projectsList');
+    const images = projectsList ? projectsList.querySelectorAll('img') : [];
+    let loadedCount = 0;
+    const total = images.length;
+    let loaderHidden = false;
+    function hideLoader() {
+      if (loaderHidden) return;
+      loaderHidden = true;
+      pageLoader.classList.add('hidden');
+      setTimeout(() => {
+        pageLoader.style.display = 'none';
+      }, 700);
     }
-  } catch (e) {
-    console.error('Error loading projects:', e);
+    // Fallback: always hide loader after 5 seconds
+    setTimeout(hideLoader, 5000);
+    if (total === 0) {
+      hideLoader();
+    } else {
+      images.forEach(img => {
+        if (img.complete) {
+          loadedCount++;
+          if (loadedCount === total) hideLoader();
+        } else {
+          img.addEventListener('load', () => {
+            loadedCount++;
+            if (loadedCount === total) hideLoader();
+          });
+          img.addEventListener('error', () => {
+            loadedCount++;
+            if (loadedCount === total) hideLoader();
+          });
+        }
+      });
+    }
+    // Extra fallback: always hide loader after DOMContentLoaded + 6s
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(hideLoader, 6000);
+    });
   }
 }
+
+// ===== LOAD PROJECTS (fetches data and calls loadServices) =====
+async function loadProjects() {
+  try {
+    const response = await fetch(projectsUrl);
+    if (!response.ok) throw new Error('Failed to load projects data');
+    const projectsArray = await response.json();
+    await loadServices(projectsArray);
+  } catch (e) {
+    console.error('Error loading projects:', e);
+    await loadServices([]); // fallback to empty
+  }
+}
+
 
 // ===== PROJECT MODAL =====
 async function openProjectModal(projectId) {
@@ -320,113 +220,121 @@ async function openProjectModal(projectId) {
   if (!modal) return;
 
   try {
-    const response = await fetch(projectsUrl);
-    const data = await response.json();
-    const projectsArray = Array.isArray(data) ? data : (Array.isArray(data.projects) ? data.projects : []);
-    const project = projectsArray.find(p => p.id === projectId);
-
-    if (!project) return;
-
-    const track = document.getElementById('modalCarouselTrack');
-    const indicators = document.getElementById('modalIndicators');
-    const prevBtn = document.getElementById('modalPrev');
-    const nextBtn = document.getElementById('modalNext');
-    const closeBtn = modal.querySelector('.modal-close');
-
-    if (!track || !indicators) return;
-
-    // Populate images using normalized schema
-    track.innerHTML = '';
-    const imgs = normalizeImages(project);
-    imgs.forEach(src => {
-      const img = document.createElement('img');
-      img.src = src;
-      img.alt = project.title;
-      img.loading = 'lazy';
-      img.decoding = 'async';
-      track.appendChild(img);
-    });
-
-    // Build indicators
-    indicators.innerHTML = '';
-    const imgElements = Array.from(track.querySelectorAll('img'));
-    imgElements.forEach((_, i) => {
-      const dot = document.createElement('span');
-      dot.className = `indicator ${i === 0 ? 'active' : ''}`;
-      dot.addEventListener('click', () => {
-        currentModalSlide = i;
-        track.style.transform = `translateX(-${currentModalSlide * 100}%)`;
-        indicators.querySelectorAll('.indicator').forEach((ind, idx) => ind.classList.toggle('active', idx === currentModalSlide));
-      });
-      indicators.appendChild(dot);
-    });
-
-    // Show modal
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-
-    // Slide state
-    let currentModalSlide = 0;
-
-    function updateButtons() {
-      indicators.querySelectorAll('.indicator').forEach((ind, idx) => ind.classList.toggle('active', idx === currentModalSlide));
-      track.style.transform = `translateX(-${currentModalSlide * 100}%)`;
-    }
-
-    // Attach controls (replace handlers to avoid doubling)
-    if (prevBtn) {
-      prevBtn.onclick = () => {
-        currentModalSlide = (currentModalSlide - 1 + imgElements.length) % imgElements.length;
-        updateButtons();
-      };
-    }
-
-    if (nextBtn) {
-      nextBtn.onclick = () => {
-        currentModalSlide = (currentModalSlide + 1) % imgElements.length;
-        updateButtons();
-      };
-    }
-
-    if (closeBtn) {
-      closeBtn.onclick = () => {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-      };
-    }
-
-    // Close on backdrop
-    modal.onclick = (e) => {
-      if (e.target === modal) {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
+    // Permanent project modal logic
+    if (projectId === 'perm-1' || projectId === 'perm-2' || projectId === 'perm-3') {
+      const track = document.getElementById('modalCarouselTrack');
+      const indicators = document.getElementById('modalIndicators');
+      const prevBtn = document.getElementById('modalPrev');
+      const nextBtn = document.getElementById('modalNext');
+      const closeBtn = modal.querySelector('.modal-close');
+      if (!track || !indicators) return;
+      track.innerHTML = '';
+      // Find the card in the DOM
+      const card = document.querySelector(`.project-card[onclick*='${projectId}']`);
+      let imgs = [];
+      let title = 'Permanent Project';
+      let category = '';
+      let description = '';
+      if (card) {
+        // Get images from card
+        const imgEls = card.querySelectorAll('.card-track img');
+        imgs = Array.from(imgEls).map(img => img.src);
+        // Get title, category, description
+        const info = card.querySelector('.project-info');
+        if (info) {
+          const h3 = info.querySelector('h3');
+          const cat = info.querySelector('.project-category');
+          const p = info.querySelector('p');
+          if (h3) title = h3.textContent;
+          if (cat) category = cat.textContent;
+          if (p) description = p.textContent;
+        }
       }
-    };
+      imgs.forEach((src, i) => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = `${title} Image ${i+1}`;
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        track.appendChild(img);
+      });
+      indicators.innerHTML = '';
+      imgs.forEach((_, i) => {
+        const dot = document.createElement('span');
+        dot.className = `indicator ${i === 0 ? 'active' : ''}`;
+        dot.addEventListener('click', () => {
+          currentModalSlide = i;
+          track.style.transform = `translateX(-${currentModalSlide * 100}%)`;
+          indicators.querySelectorAll('.indicator').forEach((ind, idx) => ind.classList.toggle('active', idx === currentModalSlide));
+        });
+        indicators.appendChild(dot);
+      });
 
-    // Keyboard navigation
-    const keyHandler = (e) => {
-      if (modal.style.display !== 'flex') return;
-      if (e.key === 'Escape') { modal.style.display = 'none'; document.body.style.overflow = 'auto'; }
-      if (e.key === 'ArrowLeft') { prevBtn?.click(); }
-      if (e.key === 'ArrowRight') { nextBtn?.click(); }
-    };
-    document.addEventListener('keydown', keyHandler);
+      // Show modal
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      const modalTitle = modal.querySelector('#modalProjectTitle');
+      if (modalTitle) modalTitle.textContent = title;
 
-    // Clean up when modal closes (one simple cleanup attached to close)
-    const cleanup = () => {
-      document.removeEventListener('keydown', keyHandler);
-      if (prevBtn) prevBtn.onclick = null;
-      if (nextBtn) nextBtn.onclick = null;
-      if (closeBtn) closeBtn.onclick = null;
-      modal.onclick = null;
-    };
-
-    // Ensure cleanup when modal hidden via close button or backdrop
-    const originalClose = closeBtn?.onclick;
-    if (closeBtn) {
-      closeBtn.onclick = () => { originalClose && originalClose(); cleanup(); };
+      // Slide state
+      let currentModalSlide = 0;
+      function updateButtons() {
+        indicators.querySelectorAll('.indicator').forEach((ind, idx) => ind.classList.toggle('active', idx === currentModalSlide));
+        track.style.transform = `translateX(-${currentModalSlide * 100}%)`;
+      }
+      if (prevBtn) {
+        prevBtn.onclick = () => {
+          currentModalSlide = (currentModalSlide - 1 + imgs.length) % imgs.length;
+          updateButtons();
+        };
+      }
+      if (nextBtn) {
+        nextBtn.onclick = () => {
+          currentModalSlide = (currentModalSlide + 1) % imgs.length;
+          updateButtons();
+        };
+      }
+      if (closeBtn) {
+        closeBtn.onclick = () => {
+          modal.classList.remove('active');
+          document.body.style.overflow = 'auto';
+        };
+      }
+      modal.onclick = (e) => {
+        if (e.target === modal) {
+          modal.classList.remove('active');
+          document.body.style.overflow = 'auto';
+        }
+      };
+      // Keyboard navigation
+      const keyHandler = (e) => {
+        if (!modal.classList.contains('active')) return;
+        if (e.key === 'Escape') { modal.classList.remove('active'); document.body.style.overflow = 'auto'; }
+        if (e.key === 'ArrowLeft') { prevBtn?.click(); }
+        if (e.key === 'ArrowRight') { nextBtn?.click(); }
+      };
+      document.addEventListener('keydown', keyHandler);
+      // Clean up when modal closes
+      const cleanup = () => {
+        document.removeEventListener('keydown', keyHandler);
+        if (prevBtn) prevBtn.onclick = null;
+        if (nextBtn) nextBtn.onclick = null;
+        if (closeBtn) closeBtn.onclick = null;
+        modal.onclick = null;
+      };
+      // Ensure cleanup when modal hidden via close button or backdrop
+      const originalClose = closeBtn?.onclick;
+      if (closeBtn) {
+        closeBtn.onclick = () => { originalClose && originalClose(); cleanup(); };
+      }
+      const originalBackdrop = modal.onclick;
+      modal.onclick = (e) => {
+        if (e.target === modal) {
+          originalBackdrop && originalBackdrop(e);
+          cleanup();
+        }
+      };
     }
-
   } catch (e) {
     console.error('Error opening modal:', e);
   }
@@ -473,39 +381,27 @@ function bindModalCarouselControls() {
 // ===== MODAL CLOSE =====
 document.addEventListener('DOMContentLoaded', function() {
   // Load content
-  loadServices();
   loadProjects();
   bindCarouselControls();
 
-  // Modal close button
-  const closeBtn = document.querySelector('[data-dismiss="modal"]');
-  if (closeBtn) {
-    closeBtn.addEventListener('click', closeProjectModal);
-  }
-
-  // Modal backdrop click
-  const modal = document.getElementById('projectModal');
-  if (modal) {
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        closeProjectModal();
+  // Event delegation for all project cards (permanent and CMS)
+  const projectsList = document.getElementById('projectsList');
+  if (projectsList) {
+    projectsList.addEventListener('click', function(e) {
+      const card = e.target.closest('.project-card');
+      if (!card) return;
+      // Only trigger for cards that are not disabled
+      if (card.style.cursor === 'default') return;
+      // Get images from card
+      const imgEls = card.querySelectorAll('.card-track img');
+      const images = Array.from(imgEls).map(img => img.getAttribute('src'));
+      // Get title
+      const titleEl = card.querySelector('.project-info h3');
+      const title = titleEl ? titleEl.textContent.trim() : 'Project Gallery';
+      // Open modal gallery
+      if (images.length > 0 && window.openProjectGalleryModal) {
+        window.openProjectGalleryModal(images, title);
       }
-    });
-  }
-
-  // WhatsApp hover tooltip
-  const whatsappFloat = document.querySelector('.whatsapp-float');
-  const whatsappTooltip = document.querySelector('.whatsapp-tooltip');
-  
-  if (whatsappFloat && whatsappTooltip) {
-    whatsappFloat.addEventListener('mouseenter', () => {
-      whatsappTooltip.style.opacity = '1';
-      whatsappTooltip.style.visibility = 'visible';
-    });
-    
-    whatsappFloat.addEventListener('mouseleave', () => {
-      whatsappTooltip.style.opacity = '0';
-      whatsappTooltip.style.visibility = 'hidden';
     });
   }
 

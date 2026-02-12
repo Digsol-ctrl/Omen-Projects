@@ -548,3 +548,69 @@ footer{background:#fff;padding:40px 0;margin-top:40px;border-top:1px solid #eee}
 img{max-width:100%;height:auto;display:block}
 
 a.btn{white-space:nowrap}
+
+/* Modal visibility and small helpers */
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:2000;align-items:center;justify-content:center;padding:20px}
+.modal.active{display:flex}
+.modal-title{color:var(--navy);margin-bottom:30px;text-align:center}
+
+/* Modal carousel (gallery) styles - match more-projects.html */
+.modal-carousel-container{
+  position:relative;
+  width:100%;
+  height:500px;
+  background-color:#000;
+  border-radius:8px;
+  overflow:hidden;
+  margin-bottom:30px;
+}
+
+.modal-carousel-track{
+  display:flex;
+  height:100%;
+  transition:transform 0.6s ease;
+}
+
+.modal-carousel-track img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  flex-shrink:0;
+}
+
+.carousel-nav{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(255,204,0,0.9);
+  color:var(--navy);
+  border:none;
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  cursor:pointer;
+  font-size:20px;
+  transition:all 0.3s ease;
+  z-index:100;
+}
+
+.carousel-prev{left:20px}
+.carousel-next{right:20px}
+
+.carousel-nav:hover{background:var(--primary-yellow);transform:translateY(-50%) scale(1.1)}
+
+.modal-indicators{display:flex;justify-content:center;gap:8px;margin:20px 0}
+.modal-indicators .indicator{width:12px;height:12px;background:rgba(255,255,255,0.5);border-radius:50%;cursor:pointer;transition:all 0.3s ease}
+.modal-indicators .indicator.active{background:var(--primary-yellow);width:24px;border-radius:6px}
+
+/* small modal close button used in team modal */
+.modal-close-small{
+  position:absolute;
+  top:12px;
+  right:12px;
+  background:none;
+  border:none;
+  font-size:22px;
+  cursor:pointer;
+  color:#666;
+}
