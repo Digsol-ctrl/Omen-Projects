@@ -1,5 +1,5 @@
 ---
-title: Bulawayo Burnside Project
+title: Bulawayo Ascott Project
 slug: Data Center
 category: Residential
 location: ZImre Harare
